@@ -11,6 +11,10 @@
     2. **其他问题不考虑内在细节，只考虑整体逻辑**
 
     * [java题解思路](https://leetcode-cn.com/problems/path-sum-iii/solution/437lu-jing-zong-he-iii-di-gui-fang-shi-by-ming-zhi/)
+    
+  * [判断一棵二叉树是否是对称二叉树  20200624 (使用递归解决了, 迭代如何实现?)](https://leetcode-cn.com/problems/symmetric-tree/)
+
+    * 用两个指针镜像遍历, 判断是否相同
 
 - 链表
 
