@@ -1,4 +1,5 @@
 # LeetCode
+
  just code it
 
 - 二叉树
@@ -11,7 +12,7 @@
     2. **其他问题不考虑内在细节，只考虑整体逻辑**
 
     * [java题解思路](https://leetcode-cn.com/problems/path-sum-iii/solution/437lu-jing-zong-he-iii-di-gui-fang-shi-by-ming-zhi/)
-    
+
   * [判断一棵二叉树是否是对称二叉树  20200624 (使用递归解决了, 迭代如何实现?)](https://leetcode-cn.com/problems/symmetric-tree/)
 
     * 用两个指针镜像遍历, 判断是否相同
@@ -26,4 +27,16 @@
   - [设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈  20200624](https://leetcode-cn.com/problems/min-stack/)
     - [用一个额外的栈 stack_min 来降序保存最小的值, 保证栈顶一定是当前栈中最小的值](https://leetcode-cn.com/problems/min-stack/solution/min-stack-fu-zhu-stackfa-by-jin407891080/)
 
-  
+- 动态规划
+
+  - [给定一个整数数组 `nums` ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。(亦可以用分治) 20200625](https://leetcode-cn.com/problems/maximum-subarray/)
+
+    - 每次遍历的时候, 更新当前 sum 的最大值:  if cur<=0 ==> sum;  else  sum += cur;
+    - ans = max(ans, sum) : 在每次遍历后使用 max() 方法 更新最优解
+
+    > 分治思想: 
+    >
+    > ![img](https://pic.leetcode-cn.com/a0f0a42149f9cebccb3ea4d8d1901d3d4ce934abd249149e2e6dbe84f17e14c2-01.png)
+    >
+    > 
+
