@@ -16,6 +16,14 @@
   * [判断一棵二叉树是否是对称二叉树  20200624 (使用递归解决了, 迭代如何实现?)](https://leetcode-cn.com/problems/symmetric-tree/)
 
     * 用两个指针镜像遍历, 判断是否相同
+    
+  * [二叉树的直径: 任意两个结点路径长度中的最大值](https://leetcode-cn.com/problems/diameter-of-binary-tree/)
+
+    * 转化为求左右子树的深度和的最大值;
+    * 求子树深度的终止条件是 if (node == null) == > return 0;
+    * 所以递归方法的 deep(TreeNode node) 的返回值 =  左右子树中最大的深度 + 1(自身节点)
+    * 使用 deep(node) 的方式 遍历整棵树, 在此过程中, 使用一个变量 ans 更新记录每次遍历后的最长路径所需要的经过的节点个数； 每次遍历后 ans = max(ans, left_deep + right_deep + 1)
+    * 最后返回最长路径 = 最长路径经过的节点个数 - 1
 
 - 链表
 
@@ -42,5 +50,5 @@
     >
     > ![img](https://pic.leetcode-cn.com/a0f0a42149f9cebccb3ea4d8d1901d3d4ce934abd249149e2e6dbe84f17e14c2-01.png)
     >
-    > 
-
+  
+- 
