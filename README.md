@@ -58,3 +58,12 @@
 
       ![](https://assets.leetcode-cn.com/solution-static/70/70_fig1.gif)
 
+  - 3) [打家劫舍(一排房屋中有不同的钱财, 不能连续抢劫, 求最优能抢到的金额)](https://leetcode-cn.com/problems/house-robber/submissions/)
+
+    - 用变量 S<sub>n</sub>保存抢前n家所能获得的最大的金额, 用 M<sub>n</sub>表示第n家的金额
+
+    - S<sub>n</sub> = max (S<sub>n-2</sub> + M<sub>n</sub>  ,   S<sub>n-1</sub>)
+
+    - 为了减少空间利用率, 可以用滚动数组的方式.
+
+      
