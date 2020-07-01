@@ -25,6 +25,11 @@
     * 使用 deep(node) 的方式 遍历整棵树, 在此过程中, 使用一个变量 ans 更新记录每次遍历后的最长路径所需要的经过的节点个数； 每次遍历后 ans = max(ans, left_deep + right_deep + 1)
     * 最后返回最长路径 = 最长路径经过的节点个数 - 1
 
+
+-----
+
+
+
 - ## 链表
 
   - ### 1) [编写一个程序，找到两个单链表相交的起始节点 20200624](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
@@ -41,13 +46,25 @@
 
     - 法2: 利用快慢指针快速找到中间节点的同时, 将前半部分的链表指针翻转, 再从中间向两端遍历判断是否相同以构成回文. 最后将链表指针顺序恢复. **(空间利用率更低, 速度更快)**
 
-      
+
+
+
+---
+
+
 
 - ## 栈
 
   - ### 1) [设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈  20200624](https://leetcode-cn.com/problems/min-stack/)
     
     - [用一个额外的栈 stack_min 来降序保存最小的值, 保证栈顶一定是当前栈中最小的值](https://leetcode-cn.com/problems/min-stack/solution/min-stack-fu-zhu-stackfa-by-jin407891080/)
+
+
+
+
+---
+
+
 
 - ## 动态规划
 
@@ -78,4 +95,8 @@
 
     - 为了减少空间利用率, 可以用滚动数组的方式.
 
-      
+
+
+
+---
+
