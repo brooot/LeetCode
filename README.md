@@ -28,9 +28,20 @@
 - 链表
 
   - 1) [编写一个程序，找到两个单链表相交的起始节点 20200624](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+    
     * [若相交，链表A： a+c, 链表B : b+c.   a+c+b+c = b+c+a+c 。则会在公共处c起点相遇。若不相交，a +b = b+a 。因此相遇处是NULL](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/tu-jie-xiang-jiao-lian-biao-by-user7208t/)
-  - 2) [判断链表是否有环]()https://leetcode-cn.com/problems/linked-list-cycle/
-    * 使用快慢指针, 快的步长为2, 慢的步长为1. 如果存在环则快慢指针定会相遇; 否则快指针会先到达链尾
+    
+  - 2) [判断链表是否有环 20200629](https://leetcode-cn.com/problems/linked-list-cycle/) 
+
+    - 使用快慢指针, 快的步长为2, 慢的步长为1. 如果存在环则快慢指针定会相遇; 否则快指针会先到达链尾
+
+  - 3) [判断链表是否回文 20200701](https://leetcode-cn.com/problems/palindrome-linked-list/submissions/)
+
+    - 法1: 快慢指针+栈, 在慢指针到达中间的时候开始判断是否回文
+
+    - 法2: 利用快慢指针快速找到中间节点的同时, 将前半部分的链表指针翻转, 再从中间向两端遍历判断是否相同以构成回文. 最后将链表指针顺序恢复. **(空间利用率更低, 速度更快)**
+
+      
 
 - 栈
 
@@ -58,7 +69,7 @@
 
       ![](https://assets.leetcode-cn.com/solution-static/70/70_fig1.gif)
 
-  - 3) [打家劫舍(一排房屋中有不同的钱财, 不能连续抢劫, 求最优能抢到的金额)](https://leetcode-cn.com/problems/house-robber/submissions/)
+  - 3) [打家劫舍(一排房屋中有不同的钱财, 不能连续抢劫, 求最优能抢到的金额 )  20200630](https://leetcode-cn.com/problems/house-robber/submissions/)
 
     - 用变量 S<sub>n</sub>保存抢前n家所能获得的最大的金额, 用 M<sub>n</sub>表示第n家的金额
 
