@@ -25,7 +25,6 @@
     * 使用 deep(node) 的方式 遍历整棵树, 在此过程中, 使用一个变量 ans 更新记录每次遍历后的最长路径所需要的经过的节点个数； 每次遍历后 ans = max(ans, left_deep + right_deep + 1)
     * 最后返回最长路径 = 最长路径经过的节点个数 - 1
 
-
 -----
 
 
@@ -48,7 +47,6 @@
 
 
 
-
 ---
 
 
@@ -58,7 +56,26 @@
   - ### 1) [设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈  20200624](https://leetcode-cn.com/problems/min-stack/)
     
     - [用一个额外的栈 stack_min 来降序保存最小的值, 保证栈顶一定是当前栈中最小的值](https://leetcode-cn.com/problems/min-stack/solution/min-stack-fu-zhu-stackfa-by-jin407891080/)
-
+    
+  - ### 2) [有效的括号 20200702](https://leetcode-cn.com/problems/valid-parentheses/)
+  
+    - ```python
+      for c in string: # 遍历字符串
+          if c is 左括号:
+              stack.push(c)  # 如果是左括号就入栈
+          else:
+              if stack.isEmpty():  # 若是右括号且栈为空, 即栈中没有能与之匹配的左括号
+                  return False
+             	if 左右括号匹配:
+                  stack.pop()  # 左右括号匹配, 将栈中左括号弹出
+              else:
+                  return False  # 栈虽不为空, 但是栈顶左括号与当前右括号不匹配, 不合法
+              
+      return stack.isEmpty()  # 仅当遍历结束后栈为空时, 字符串合法
+      
+      ```
+  
+      
 
 
 
@@ -94,7 +111,6 @@
     - S<sub>n</sub> = max (S<sub>n-2</sub> + M<sub>n</sub>  ,   S<sub>n-1</sub>)
 
     - 为了减少空间利用率, 可以用滚动数组的方式.
-
 
 
 
