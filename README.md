@@ -25,9 +25,45 @@
     * 使用 deep(node) 的方式 遍历整棵树, 在此过程中, 使用一个变量 ans 更新记录每次遍历后的最长路径所需要的经过的节点个数； 每次遍历后 ans = max(ans, left_deep + right_deep + 1)
     * 最后返回最长路径 = 最长路径经过的节点个数 - 1
 
------
 
 
+- ## 数组
+
+  - ### 1) [最短无序连续子数组 20200703](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/)
+
+    - 自己想的方法是, 从左到右遍历找到逆序中的最小值 min , 并更新当前遇到的最大值,以此来找到右边界; 再从右边届向左遍历, 找出左边界.
+
+    - 看到两个比较巧妙的方法:
+
+      1. 向右遍历, 用 left = nums.length-1 记录左边界; 记录当前的最大值max_previous; 当遇到cur_Num < max_previous 的时候, 就更新 left 的值 , 试着将所有比 cur_Num 大的数放到 左边界 left 右边去;  同时, 更新 right = cur_Num.index() .  这样 一次遍历就找出了左右边界.
+
+      2. 使用一次for循环, 分别从两端相向而行来分别更新左右边界, 简洁而巧妙. 
+
+         ```java
+         class Solution {
+             public int findUnsortedSubarray(int[] nums) {
+                 int len = nums.length;
+                 int max = nums[0];
+                 int min = nums[len-1];
+                 int l = 0, r = -1;
+                 for(int i=0;i<len;i++){
+                     if(max>nums[i]){
+                         r = i;
+                     }else{
+                         max = nums[i];
+                     }
+                     if(min<nums[len-i-1]){
+                         l = len-i-1;
+                     }else{
+                         min = nums[len-i-1];
+                     }
+                 }
+                 return r-l+1;
+             }
+         }
+         ```
+
+         
 
 - ## 链表
 
