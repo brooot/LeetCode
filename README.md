@@ -152,3 +152,31 @@
 
 ---
 
+
+
+- ## 回溯
+
+  - ### 1) [78.子集 20200706](https://leetcode-cn.com/problems/subsets/)
+
+    - <details>
+        <summary>java 遍历</summary>
+      ```
+      class Solution {
+        public List<List<Integer>> subsets(int[] nums) {
+          List<List<Integer>> res = new ArrayList();
+          res.add(new ArrayList<Integer>());
+          for (int num:nums){
+              List<List<Integer>> tempArr = new ArrayList();
+              for (List<Integer> subArr:res){
+                  tempArr.add(new ArrayList<Integer>(subArr){{add(num);}});
+              }
+              for (List<Integer> arr:tempArr)
+                  res.add(arr);
+          }
+          return res;
+        }
+      }
+      ```
+      </details>
+
+### 
