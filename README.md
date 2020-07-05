@@ -158,9 +158,18 @@
 
   - ### 1) [78.子集 20200706](https://leetcode-cn.com/problems/subsets/)
 
-    - <details>
-        <summary>java 遍历</summary>
-      <pre>
+    - 
+       遍历思想
+      ```
+      //python3
+      class Solution:
+          def subsets(self, nums: List[int]) -> List[List[int]]:
+              res = [[]]
+              for num in nums:
+                  res += [[num] + arr for arr in res]
+              return res;
+      
+      //java
       class Solution {
         public List<List<Integer>> subsets(int[] nums) {
           List<List<Integer>> res = new ArrayList();
@@ -176,12 +185,28 @@
           return res;
         }
       }
-      </pre>
-      </details>
+      ```
 
-    - <details>
-        <summary>java 回溯</summary>
-      <pre>
+    - 递归思想
+
+      ```
+      class Solution:
+          def subsets(self, nums: List[int]) -> List[List[int]]:
+              res = []
+              n = len(nums)
+              def helper(i, temp):
+                  res.append(temp)
+                  for j in range(i, n):
+                      helper(j+1, temp + [nums[j]])
+              helper(0, [])
+              return res;
+      ```
+
+      
+
+    - java 回溯
+
+      ```
       class Solution {
         public List<List<Integer>> subsets(int[] nums) {
           List<List<Integer>> res = new ArrayList();
@@ -190,18 +215,11 @@
         }
         public void backtrack(int i, int[] nums, List<List<Integer>> res, ArrayList<Integer> temp) {
           res.add(new ArrayList<Integer>(temp));
-          for (int j=i; j<nums.length; j++) {
+          for (int j=i; j小于nums.length; j++) {
               temp.add(nums[j]);
               backtrack(j+1, nums, res, temp);
               temp.remove(temp.size()-1);
           }
         }
       }
-      </pre>
-      </details>
-
-    - fd
-
-    - fs
-
-    - 
+      ```
