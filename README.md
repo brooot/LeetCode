@@ -223,3 +223,30 @@
         }
       }
       ```
+
+  - ### [全排列 20200706](https://leetcode-cn.com/problems/permutations/)
+
+    - 利用树形结构 + 回溯 
+
+      ![](https://pic.leetcode-cn.com/0bf18f9b86a2542d1f6aa8db6cc45475fce5aa329a07ca02a9357c2ead81eec1-image.png)
+
+    - 使用 path 记录深度优先遍历的路径, used[]  记录节点是否在path中
+
+    - 终止条件: 当path长度等于数组长度的时候, 将 path添加到 res 数组中
+
+    - 在此过程中如果节点不再path中, 就将其加入并设置uesd 为true, 然后dfs递归. 在递归结束后恢复递归前的状态, 即将最新加入的节点删除并置used为false, 此即回溯的含义.
+
+      ```java
+      for(int i=0; i<nums.length; i++) {
+                  if(!used[i]){
+                      used[i] = true;
+                      path.add(nums[i]);
+                      dfs(used, nums, res, path, depth+1);
+                      used[i] = false;
+                      path.remove(path.size()-1);
+                  }
+              }
+      ```
+
+      
+
