@@ -215,7 +215,7 @@
         }
         public void backtrack(int i, int[] nums, List<List<Integer>> res, ArrayList<Integer> temp) {
           res.add(new ArrayList<Integer>(temp));
-          for (int j=i; j小于nums.length; j++) {
+          for (int j=i; j<>nums.length; j++) {
               temp.add(nums[j]);
               backtrack(j+1, nums, res, temp);
               temp.remove(temp.size()-1);
