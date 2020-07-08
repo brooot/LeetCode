@@ -24,6 +24,14 @@
     * 所以递归方法的 deep(TreeNode node) 的返回值 =  左右子树中最大的深度 + 1(自身节点)
     * 使用 deep(node) 的方式 遍历整棵树, 在此过程中, 使用一个变量 ans 更新记录每次遍历后的最长路径所需要的经过的节点个数； 每次遍历后 ans = max(ans, left_deep + right_deep + 1)
     * 最后返回最长路径 = 最长路径经过的节点个数 - 1
+    
+  * ### 4) [22.括号生成 20200708](https://leetcode-cn.com/problems/generate-parentheses/)
+  
+    * ![](https://pic.leetcode-cn.com/7ec04f84e936e95782aba26c4663c5fe7aaf94a2a80986a97d81574467b0c513-LeetCode%20%E7%AC%AC%2022%20%E9%A2%98%EF%BC%9A%E2%80%9C%E6%8B%AC%E5%8F%B7%E7%94%9F%E5%87%BA%E2%80%9D%E9%A2%98%E8%A7%A3%E9%85%8D%E5%9B%BE.png)
+    * 当前左右括号都有大于 00 个可以使用的时候，才产生分支；
+    * 产生左分支的时候，只看当前是否还有左括号可以使用；
+    * 产生右分支的时候，还受到左分支的限制，右边剩余可以使用的括号数量一定得在严格大于左边剩余的数量的时候，才可以产生分支；
+    * 在左边和右边剩余的括号数都等于 00 的时候结算。
 
 
 
@@ -160,7 +168,7 @@
 
     - 
        遍历思想
-      ```
+      <details><summary>展开代码</summary><pre>
       //python3
       class Solution:
           def subsets(self, nums: List[int]) -> List[List[int]]:
@@ -168,7 +176,7 @@
               for num in nums:
                   res += [[num] + arr for arr in res]
               return res;
-      
+      -----------------------------------------------------------------
       //java
       class Solution {
         public List<List<Integer>> subsets(int[] nums) {
@@ -185,11 +193,12 @@
           return res;
         }
       }
-      ```
-
-    - 递归思想
-
-      ```
+      </pre>    
+  </details>
+       
+  - 递归思想
+  
+      <details><summary>展开代码</summary><pre>
       class Solution:
           def subsets(self, nums: List[int]) -> List[List[int]]:
               res = []
@@ -200,14 +209,11 @@
                       helper(j+1, temp + [nums[j]])
               helper(0, [])
               return res;
-      ```
-
-      
-
+    
     - java 回溯
 
-      ```
-      class Solution {
+      <details><summary>展开代码</summary><pre>
+    class Solution {
         public List<List<Integer>> subsets(int[] nums) {
           List<List<Integer>> res = new ArrayList();
           backtrack(0, nums, res, new ArrayList<Integer>());
@@ -222,23 +228,22 @@
           }
         }
       }
-      ```
-
-  - ### [全排列 20200706](https://leetcode-cn.com/problems/permutations/)
-
-    - 利用树形结构 + 回溯 
-
-      ![](https://pic.leetcode-cn.com/0bf18f9b86a2542d1f6aa8db6cc45475fce5aa329a07ca02a9357c2ead81eec1-image.png)
-
-    - 使用 path 记录深度优先遍历的路径, used[]  记录节点是否在path中
-
-    - 终止条件: 当path长度等于数组长度的时候, 将 path添加到 res 数组中
-
-    - 在此过程中如果节点不在path中, 就将其加入并设置uesd 为true, 然后dfs递归. 在递归结束后恢复递归前的状态, 即将最新加入的节点删除并置used为false, 此即回溯的含义.
-
-      ```java
+  
+  - ### 2) [全排列 20200706](https://leetcode-cn.com/problems/permutations/)
+  
+  - 利用树形结构 + 回溯 
+  
+    ![](https://pic.leetcode-cn.com/0bf18f9b86a2542d1f6aa8db6cc45475fce5aa329a07ca02a9357c2ead81eec1-image.png)
+  
+  - 使用 path 记录深度优先遍历的路径, used[]  记录节点是否在path中
+  
+  - 终止条件: 当path长度等于数组长度的时候, 将 path添加到 res 数组中
+  
+  - 在此过程中如果节点不在path中, 就将其加入并设置uesd 为true, 然后dfs递归. 在递归结束后恢复递归前的状态, 即将最新加入的节点删除并置used为false, 此即回溯的含义.
+  
+    ```java
       for(int i=0; i<nums.length; i++) {
-                  if(!used[i]){
+                if(!used[i]){
                       used[i] = true;
                       path.add(nums[i]);
                       dfs(used, nums, res, path, depth+1);
@@ -247,6 +252,6 @@
                   }
               }
       ```
-
+  
       
 
