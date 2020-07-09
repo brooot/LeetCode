@@ -253,3 +253,37 @@
   
         
 
+- ## 递归
+
+  - ### [338.比特位计数 20200709](https://leetcode-cn.com/problems/counting-bits/)
+
+    - 一个数乘以2后其就是左移一位, 1 的个数不会改变, 一个偶数a, a+1 的 1 的个数是 res[a] + 1
+
+      <details><summary>展开 java 递归代码</summary><pre>
+          class Solution {
+          private int[] res;
+          public int[] countBits(int num) {
+              res = new int[num + 1];
+              if (num == 0) {
+                  return res;
+              }
+              res[1] = 1;
+              helper(num, 1, 1);
+              return res;
+          }
+          private void helper(int num, int i, int count) {
+              i = i << 1; // i *= 2
+              if (i <= num) {
+                  res[i] = count; // 左移1的个数不改变
+                  helper(num, i, count);
+              }
+              i += 1; // 此时 i 必定为奇数
+              if (i <= num) {
+                  res[i] = count + 1; 此奇数的1的个数必定是前一个偶数的1的个数+1
+                  helper(num, i, count + 1);
+              }
+          }
+      }
+      </details>
+
+      
