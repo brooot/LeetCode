@@ -4,7 +4,7 @@
 
 - ## 二叉树
 
-  * ### 1)  [计算从上到下任意起始和结尾节点的和为某一定值的路径个数 20200623](https://leetcode-cn.com/problems/path-sum-iii/  "don't stop")
+  * #### 1)  [计算从上到下任意起始和结尾节点的和为某一定值的路径个数 20200623](https://leetcode-cn.com/problems/path-sum-iii/  "don't stop")
 
     1. **找到最简单的子问题求解**
        * 终止条件
@@ -13,11 +13,11 @@
 
     * [java题解思路](https://leetcode-cn.com/problems/path-sum-iii/solution/437lu-jing-zong-he-iii-di-gui-fang-shi-by-ming-zhi/)
 
-  * ### 2) [判断一棵二叉树是否是对称二叉树  20200624 (使用递归解决了, 迭代如何实现?)](https://leetcode-cn.com/problems/symmetric-tree/)
+  * #### 2) [判断一棵二叉树是否是对称二叉树  20200624 (使用递归解决了, 迭代如何实现?)](https://leetcode-cn.com/problems/symmetric-tree/)
 
     * 用两个指针镜像遍历, 判断是否相同
     
-  * ### 3) [二叉树的直径: 任意两个结点路径长度中的最大值 20200625](https://leetcode-cn.com/problems/diameter-of-binary-tree/)
+  * #### 3) [二叉树的直径: 任意两个结点路径长度中的最大值 20200625](https://leetcode-cn.com/problems/diameter-of-binary-tree/)
 
     * 转化为求左右子树的深度和的最大值;
     * 求子树深度的终止条件是 if (node == null) == > return 0;
@@ -25,7 +25,7 @@
     * 使用 deep(node) 的方式 遍历整棵树, 在此过程中, 使用一个变量 ans 更新记录每次遍历后的最长路径所需要的经过的节点个数； 每次遍历后 ans = max(ans, left_deep + right_deep + 1)
     * 最后返回最长路径 = 最长路径经过的节点个数 - 1
     
-  * ### 4) [22.括号生成 20200708](https://leetcode-cn.com/problems/generate-parentheses/)
+  * #### 4) [22.括号生成 20200708](https://leetcode-cn.com/problems/generate-parentheses/)
   
     * ![](https://pic.leetcode-cn.com/7ec04f84e936e95782aba26c4663c5fe7aaf94a2a80986a97d81574467b0c513-LeetCode%20%E7%AC%AC%2022%20%E9%A2%98%EF%BC%9A%E2%80%9C%E6%8B%AC%E5%8F%B7%E7%94%9F%E5%87%BA%E2%80%9D%E9%A2%98%E8%A7%A3%E9%85%8D%E5%9B%BE.png)
     * 当前左右括号都有大于 00 个可以使用的时候，才产生分支；
@@ -37,7 +37,7 @@
 
 - ## 数组
 
-  - ### 1) [最短无序连续子数组 20200703](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/)
+  - #### 1) [最短无序连续子数组 20200703](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/)
 
     - 自己想的方法是, 从左到右遍历找到逆序中的最小值 min , 并更新当前遇到的最大值,以此来找到右边界; 再从右边届向左遍历, 找出左边界.
 
@@ -75,15 +75,15 @@
 
 - ## 链表
 
-  - ### 1) [编写一个程序，找到两个单链表相交的起始节点 20200624](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+  - #### 1) [编写一个程序，找到两个单链表相交的起始节点 20200624](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
     
     * [若相交，链表A： a+c, 链表B : b+c.   a+c+b+c = b+c+a+c 。则会在公共处c起点相遇。若不相交，a +b = b+a 。因此相遇处是NULL](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/tu-jie-xiang-jiao-lian-biao-by-user7208t/)
     
-  - ### 2) [判断链表是否有环 20200629](https://leetcode-cn.com/problems/linked-list-cycle/) 
+  - #### 2) [判断链表是否有环 20200629](https://leetcode-cn.com/problems/linked-list-cycle/) 
 
     - 使用快慢指针, 快的步长为2, 慢的步长为1. 如果存在环则快慢指针定会相遇; 否则快指针会先到达链尾
 
-  - ### 3) [判断链表是否回文 20200701](https://leetcode-cn.com/problems/palindrome-linked-list/submissions/)
+  - #### 3) [判断链表是否回文 20200701](https://leetcode-cn.com/problems/palindrome-linked-list/submissions/)
 
     - 法1: 快慢指针+栈, 在慢指针到达中间的时候开始判断是否回文
 
@@ -97,11 +97,11 @@
 
 - ## 栈
 
-  - ### 1) [设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈  20200624](https://leetcode-cn.com/problems/min-stack/)
+  - #### 1) [设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈  20200624](https://leetcode-cn.com/problems/min-stack/)
     
     - [用一个额外的栈 stack_min 来降序保存最小的值, 保证栈顶一定是当前栈中最小的值](https://leetcode-cn.com/problems/min-stack/solution/min-stack-fu-zhu-stackfa-by-jin407891080/)
     
-  - ### 2) [有效的括号 20200702](https://leetcode-cn.com/problems/valid-parentheses/)
+  - #### 2) [有效的括号 20200702](https://leetcode-cn.com/problems/valid-parentheses/)
   
     - ```python
       for c in string: # 遍历字符串
@@ -129,7 +129,7 @@
 
 - ## 动态规划
 
-  - ### 1) [给定一个整数数组 `nums` ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。(亦可以用分治) 20200625](https://leetcode-cn.com/problems/maximum-subarray/)
+  - #### 1) [给定一个整数数组 `nums` ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。(亦可以用分治) 20200625](https://leetcode-cn.com/problems/maximum-subarray/)
 
     - 每次遍历的时候, 更新当前 sum 的最大值:  if cur<=0 ==> sum;  else  sum += cur;
     - ans = max(ans, sum) : 在每次遍历后使用 max() 方法 更新最优解
@@ -142,13 +142,13 @@
     >
     > ![img](https://pic.leetcode-cn.com/a0f0a42149f9cebccb3ea4d8d1901d3d4ce934abd249149e2e6dbe84f17e14c2-01.png)
     
-  - ### 2) [爬楼梯 20200626](https://leetcode-cn.com/problems/climbing-stairs/submissions/)
+  - #### 2) [爬楼梯 20200626](https://leetcode-cn.com/problems/climbing-stairs/submissions/)
 
     - 斐波那契数列, 使用递归或者滚动数组的思想
 
       ![](https://assets.leetcode-cn.com/solution-static/70/70_fig1.gif)
 
-  - ### 3) [打家劫舍(一排房屋中有不同的钱财, 不能连续抢劫, 求最优能抢到的金额 )  20200630](https://leetcode-cn.com/problems/house-robber/submissions/)
+  - #### 3) [打家劫舍(一排房屋中有不同的钱财, 不能连续抢劫, 求最优能抢到的金额 )  20200630](https://leetcode-cn.com/problems/house-robber/submissions/)
 
     - 用变量 S<sub>n</sub>保存抢前n家所能获得的最大的金额, 用 M<sub>n</sub>表示第n家的金额
 
@@ -164,7 +164,7 @@
 
 - ## 回溯
 
-  - ### 1) [78.子集 20200706](https://leetcode-cn.com/problems/subsets/)
+  - #### 1) [78.子集 20200706](https://leetcode-cn.com/problems/subsets/)
 
     - 
        遍历思想
@@ -229,7 +229,7 @@
         }
       }
     
-  - ### 2) [全排列 20200706](https://leetcode-cn.com/problems/permutations/)
+  - #### 2) [全排列 20200706](https://leetcode-cn.com/problems/permutations/)
   
       - 利用树形结构 + 回溯 
   
@@ -255,7 +255,7 @@
 
 - ## 递归
 
-  - ### [338.比特位计数 20200709](https://leetcode-cn.com/problems/counting-bits/)
+  - #### [338.比特位计数 20200709](https://leetcode-cn.com/problems/counting-bits/)
 
     - 一个数乘以2后其就是左移一位, 1 的个数不会改变, 一个偶数a, a+1 的 1 的个数是 res[a] + 1
 
@@ -286,4 +286,27 @@
       }
       </details>
 
+  - #### [94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+
+    - 使用递归
+
+      ```java
+      class Solution {
+          public List<Integer> inorderTraversal(TreeNode root) {
+              List<Integer> res = new ArrayList();
+              dfs(res, root);
+              return res;
+          }
       
+          private void dfs(List<Integer> res, TreeNode node) {
+              if(node == null)
+                  return;
+              dfs(res, node.left);
+              res.add(node.val);
+              dfs(res, node.right);
+          }
+      }
+      ```
+
+      
+
