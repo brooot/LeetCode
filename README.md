@@ -86,8 +86,54 @@
   - #### 3) [判断链表是否回文 20200701](https://leetcode-cn.com/problems/palindrome-linked-list/submissions/)
 
     - 法1: 快慢指针+栈, 在慢指针到达中间的时候开始判断是否回文
+  - 法2: 利用快慢指针快速找到中间节点的同时, 将前半部分的链表指针翻转, 再从中间向两端遍历判断是否相同以构成回文. 最后将链表指针顺序恢复. **(空间利用率更低, 速度更快)**
+    
+  - #### 4) [206. 反转链表 20200710](https://leetcode-cn.com/problems/reverse-linked-list/)
 
-    - 法2: 利用快慢指针快速找到中间节点的同时, 将前半部分的链表指针翻转, 再从中间向两端遍历判断是否相同以构成回文. 最后将链表指针顺序恢复. **(空间利用率更低, 速度更快)**
+    - <details><summary>递归方法: 先处理后边的, 再处理当前的</summary><pre>
+          class Solution {
+          private ListNode res;
+          private ListNode temp;
+          public ListNode reverseList(ListNode head) {
+              if(head==null || head.next==null)
+                  return head;
+              ListNode ptr = head;
+              dfs(ptr);
+              return res;
+          }
+          private void dfs(ListNode ptr) {
+              if(ptr.next != null ){
+                  dfs(ptr.next);
+                  temp.next = new ListNode(ptr.val);
+                  temp = temp.next;
+              }
+              else{
+                  res = new ListNode(ptr.val);
+                  temp = res;
+              }
+          }
+      }
+      </details>
+
+    - <details><summary>遍历方法: 头插法</summary><pre>
+      class Solution {
+          public ListNode reverseList(ListNode head) {
+              if(head == null)
+                  return head;
+              ListNode ans = null;
+              while(head != null){
+                  ListNode h = head.next;
+                  head.next = ans;
+                  ans = head;
+                  head = h;
+              }
+              return ans;
+          }
+      }
+
+      
+
+      
 
 
 
@@ -286,7 +332,7 @@
       }
       </details>
 
-  - #### [94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+  - #### [94. 二叉树的中序遍历 20200710](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
 
     - 使用递归
 
