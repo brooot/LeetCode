@@ -109,10 +109,11 @@
   - #### 3) [判断链表是否回文 20200701](https://leetcode-cn.com/problems/palindrome-linked-list/submissions/)
 
     - 法1: 快慢指针+栈, 在慢指针到达中间的时候开始判断是否回文
+    
   - 法2: 利用快慢指针快速找到中间节点的同时, 将前半部分的链表指针翻转, 再从中间向两端遍历判断是否相同以构成回文. 最后将链表指针顺序恢复. **(空间利用率更低, 速度更快)**
     
-  - #### 4) [206. 反转链表 20200710](https://leetcode-cn.com/problems/reverse-linked-list/)
-
+- #### 4) [206. 反转链表 20200710](https://leetcode-cn.com/problems/reverse-linked-list/)
+  
     - <details><summary>递归方法: 先处理后边的, 再处理当前的</summary><pre>
           class Solution {
           private ListNode res;
@@ -136,8 +137,8 @@
               }
           }
       }
-      </details>
-
+    </details>
+  
     - <details><summary>遍历方法: 头插法</summary><pre>
       class Solution {
           public ListNode reverseList(ListNode head) {
@@ -152,13 +153,42 @@
               }
               return ans;
           }
+    }
+  
+- #### 5) [328. 奇偶链表 20200711](https://leetcode-cn.com/problems/odd-even-linked-list/)
+  
+    - **示例:**
+  
+      ```
+      输入: 2->1->3->5->6->4->7->NULL 
+      输出: 2->3->6->7->1->5->4->NULL
+      ```
+  
+    - <details><summary>用两个指针交替拆线将原链表分成两个分别保存奇偶序号节点的链表, 最终完成拼接</summary><pre>
+      class Solution {
+          public ListNode oddEvenList(ListNode head) {
+              if(head == null || head.next == null)
+                  return head;
+              ListNode odd_tail = head;
+              ListNode even_head = head.next;
+              ListNode even_tail = even_head;
+              ListNode t;
+              while(even_tail != null && even_tail.next != null) {
+                  odd_tail.next = even_tail.next;
+                  odd_tail = odd_tail.next;
+                  even_tail.next = odd_tail.next;
+                  even_tail = even_tail.next;
+              }
+              odd_tail.next = even_head;
+              return head;
+          }
       }
-
-      
-
-      
-
-
+      最终会出现两种情况:
+      	1) odd_tail -> even_tail(null) 
+      	2) odd_tail -> even_tail -> null
+      在 odd_tail.next = even_head; 后都能完成拼接操作.
+  
+      ​	
 
 ---
 
