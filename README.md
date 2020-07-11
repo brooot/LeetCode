@@ -71,7 +71,30 @@
          }
          ```
 
-         
+  - #### [238. 除自身以外数组的乘积 20200711](https://leetcode-cn.com/problems/product-of-array-except-self/)
+
+    - 分别从左到右和从右到左两趟遍历来计算.
+
+      ```java
+      class Solution {
+          public int[] productExceptSelf(int[] nums) {
+              int len = nums.length;
+              int[] ans = new int[len];
+              ans[0] = 1;
+              for(int i=1; i<len; i++) { // 从左到右依次计算得到每个点左边的乘积
+                  ans[i] = ans[i-1] * nums[i-1];
+              }
+              int right_multi = nums[len-1];
+              for(int i=len-2; i>=0; i--) { // 从右到左, 依次计算得到右边的乘积并整合
+                  ans[i] *= right_multi;
+                  right_multi *= nums[i];
+              }
+              return ans;
+          }
+      }
+      ```
+
+      
 
 - ## 链表
 
