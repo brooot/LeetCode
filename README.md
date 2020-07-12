@@ -111,7 +111,7 @@
     - 法1: 快慢指针+栈, 在慢指针到达中间的时候开始判断是否回文
     
   - 法2: 利用快慢指针快速找到中间节点的同时, 将前半部分的链表指针翻转, 再从中间向两端遍历判断是否相同以构成回文. 最后将链表指针顺序恢复. **(空间利用率更低, 速度更快)**
-    
+  
 - #### 4) [206. 反转链表 20200710](https://leetcode-cn.com/problems/reverse-linked-list/)
   
     - <details><summary>递归方法: 先处理后边的, 再处理当前的</summary><pre>
@@ -138,7 +138,7 @@
           }
       }
     </details>
-  
+    
     - <details><summary>遍历方法: 头插法</summary><pre>
       class Solution {
           public ListNode reverseList(ListNode head) {
@@ -158,12 +158,12 @@
 - #### 5) [328. 奇偶链表 20200711](https://leetcode-cn.com/problems/odd-even-linked-list/)
   
     - **示例:**
-  
+    
       ```
       输入: 2->1->3->5->6->4->7->NULL 
       输出: 2->3->6->7->1->5->4->NULL
       ```
-  
+    
     - <details><summary>用两个指针交替拆线将原链表分成两个分别保存奇偶序号节点的链表, 最终完成拼接</summary><pre>
       class Solution {
           public ListNode oddEvenList(ListNode head) {
@@ -187,7 +187,7 @@
       	1) odd_tail -> even_tail(null) 
       	2) odd_tail -> even_tail -> null
       在 odd_tail.next = even_head; 后都能完成拼接操作.
-  
+    
       ​	
 
 ---
@@ -354,7 +354,7 @@
 
 - ## 递归
 
-  - #### [338.比特位计数 20200709](https://leetcode-cn.com/problems/counting-bits/)
+  - #### 1) [338.比特位计数 20200709](https://leetcode-cn.com/problems/counting-bits/)
 
     - 一个数乘以2后其就是左移一位, 1 的个数不会改变, 一个偶数a, a+1 的 1 的个数是 res[a] + 1
 
@@ -385,7 +385,7 @@
       }
       </details>
 
-  - #### [94. 二叉树的中序遍历 20200710](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+  - #### 2) [94. 二叉树的中序遍历 20200710](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
 
     - 使用递归
 
@@ -405,6 +405,30 @@
               dfs(res, node.right);
           }
       }
+      ```
+
+  - #### 3) [114. 二叉树展开为链表](https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)
+
+    - 在递归中进行变换: 从最底层开始变换(先递归再变换)
+
+      ```java
+      public void flatten(TreeNode root) {
+              if(root == null)
+                  return;
+      		/*这两句可以调换顺序, 不影响结果, 区别是默认优先从左子树还是右字数进行变换*/
+              flatten(root.left); // (1)
+              flatten(root.right); // (2) 
+      
+              // 暂存右子树, 左边移到右边, 左边置为空
+              TreeNode temp = root.right;
+              root.right = root.left;
+              root.left = null;
+      
+              // 移到当前右子树的最右下端, 将旧的右子树接到其下
+              while(root.right != null)
+                  root = root.right;
+              root.right = temp;
+          }
       ```
 
       
