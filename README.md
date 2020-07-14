@@ -310,7 +310,7 @@
                 return res;
       
     - java 回溯
-  
+
       <details><summary>展开代码</summary><pre>
       class Solution {
         public List<List<Integer>> subsets(int[] nums) {
@@ -329,15 +329,15 @@
       }
     
   - #### 2) [全排列 20200706](https://leetcode-cn.com/problems/permutations/)
-  
+
       - 利用树形结构 + 回溯 
-  
+
       ![](https://pic.leetcode-cn.com/0bf18f9b86a2542d1f6aa8db6cc45475fce5aa329a07ca02a9357c2ead81eec1-image.png)
-  
+
       - 使用 path 记录深度优先遍历的路径, used[]  记录节点是否在path中
       - 终止条件: 当path长度等于数组长度的时候, 将 path添加到 res 数组中
       - 在此过程中如果节点不在path中, 就将其加入并设置uesd 为true, 然后dfs递归. 在递归结束后恢复递归前的状态, 即将最新加入的节点删除并置used为false, 此即回溯的含义.
-  
+
       ```java
         for(int i=0; i<nums.length; i++) {
                   if(!used[i]){
@@ -349,8 +349,14 @@
                     }
                 }
       ```
-  
-        
+
+  - #### 3) [39. 组合总和 20200714](https://leetcode-cn.com/problems/combination-sum/)
+
+    - 给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+
+      candidates 中的数字可以无限制重复被选取。
+
+    - 遍历candidates, 记录path, 记录当前遍历的index, 在未满足条件的情况下使用当前index作为起始点继续寻找, 使得该点能够被重复添加到path中; 在寻找的过程中, 没加入一个点, 就在target中减去这个值, 当target == 0 的时候, 就将path中的点组成的list加入到res中.
 
 - ## 递归
 
