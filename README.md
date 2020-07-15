@@ -2,7 +2,7 @@ LeetCode
 
  just code it
 
-- ## 二叉树
+- ## 树
 
   * #### 1)  [计算从上到下任意起始和结尾节点的和为某一定值的路径个数 20200623](https://leetcode-cn.com/problems/path-sum-iii/  "don't stop")
 
@@ -26,14 +26,30 @@ LeetCode
     * 最后返回最长路径 = 最长路径经过的节点个数 - 1
     
   * #### 4) [22.括号生成 20200708](https://leetcode-cn.com/problems/generate-parentheses/)
-  
+
     * ![](https://pic.leetcode-cn.com/7ec04f84e936e95782aba26c4663c5fe7aaf94a2a80986a97d81574467b0c513-LeetCode%20%E7%AC%AC%2022%20%E9%A2%98%EF%BC%9A%E2%80%9C%E6%8B%AC%E5%8F%B7%E7%94%9F%E5%87%BA%E2%80%9D%E9%A2%98%E8%A7%A3%E9%85%8D%E5%9B%BE.png)
     * 当前左右括号都有大于 00 个可以使用的时候，才产生分支；
     * 产生左分支的时候，只看当前是否还有左括号可以使用；
     * 产生右分支的时候，还受到左分支的限制，右边剩余可以使用的括号数量一定得在严格大于左边剩余的数量的时候，才可以产生分支；
     * 在左边和右边剩余的括号数都等于 00 的时候结算。
+    
+  * #### 5) [208. 实现 Trie (前缀树)](https://leetcode-cn.com/problems/implement-trie-prefix-tree/)
 
+    * 实现一个 Trie (前缀树)，包含 `insert`, `search`, 和 `startsWith` 这三个操作。
 
+    * ```java
+      class TrieNode {
+              private boolean isEnd;
+              TrieNode[] next;
+      
+              public TrieNode() {
+                  this.isEnd = false;
+                  this.next = new TrieNode[26];
+              }
+          }
+      ```
+
+      
 
 - ## 数组
 
@@ -121,7 +137,7 @@ LeetCode
     - 法1: 快慢指针+栈, 在慢指针到达中间的时候开始判断是否回文
     
   - 法2: 利用快慢指针快速找到中间节点的同时, 将前半部分的链表指针翻转, 再从中间向两端遍历判断是否相同以构成回文. 最后将链表指针顺序恢复. **(空间利用率更低, 速度更快)**
-  
+
   - #### 4) [206. 反转链表 20200710](https://leetcode-cn.com/problems/reverse-linked-list/)
     
       - <details><summary>递归方法: 先处理后边的, 再处理当前的</summary><pre>
