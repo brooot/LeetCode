@@ -1,4 +1,4 @@
-# LeetCode
+LeetCode
 
  just code it
 
@@ -94,7 +94,17 @@
       }
       ```
 
-      
+  - #### [48. 旋转图像 20200715](https://leetcode-cn.com/problems/rotate-image/)
+
+    - > 给定一个 *n* × *n* 的二维矩阵表示一个图像。
+      >
+      > 将图像顺时针旋转 90 度。
+
+    - 方法一: 先转置矩阵，然后翻转每一行
+
+    - 方法二: 剥洋葱式层层翻转, 注: 外层循环多一层
+
+      ![](https://pic.leetcode-cn.com/12605efb60d2efc64e6ecfcf6562a98a49acb3ce696b0c1ad3da46ab8977fa16-48_angles.png)
 
 - ## 链表
 
@@ -112,82 +122,83 @@
     
   - 法2: 利用快慢指针快速找到中间节点的同时, 将前半部分的链表指针翻转, 再从中间向两端遍历判断是否相同以构成回文. 最后将链表指针顺序恢复. **(空间利用率更低, 速度更快)**
   
-- #### 4) [206. 反转链表 20200710](https://leetcode-cn.com/problems/reverse-linked-list/)
-  
-    - <details><summary>递归方法: 先处理后边的, 再处理当前的</summary><pre>
-          class Solution {
-          private ListNode res;
-          private ListNode temp;
-          public ListNode reverseList(ListNode head) {
-              if(head==null || head.next==null)
-                  return head;
-              ListNode ptr = head;
-              dfs(ptr);
-              return res;
-          }
-          private void dfs(ListNode ptr) {
-              if(ptr.next != null ){
-                  dfs(ptr.next);
-                  temp.next = new ListNode(ptr.val);
-                  temp = temp.next;
-              }
-              else{
-                  res = new ListNode(ptr.val);
-                  temp = res;
-              }
-          }
-      }
-    </details>
+  - #### 4) [206. 反转链表 20200710](https://leetcode-cn.com/problems/reverse-linked-list/)
     
-    - <details><summary>遍历方法: 头插法</summary><pre>
-      class Solution {
-          public ListNode reverseList(ListNode head) {
-              if(head == null)
-                  return head;
-              ListNode ans = null;
-              while(head != null){
-                  ListNode h = head.next;
-                  head.next = ans;
-                  ans = head;
-                  head = h;
-              }
-              return ans;
-          }
-    }
-  
-- #### 5) [328. 奇偶链表 20200711](https://leetcode-cn.com/problems/odd-even-linked-list/)
-  
-    - **示例:**
+      - <details><summary>递归方法: 先处理后边的, 再处理当前的</summary><pre>
+            class Solution {
+            private ListNode res;
+            private ListNode temp;
+            public ListNode reverseList(ListNode head) {
+                if(head==null || head.next==null)
+                    return head;
+                ListNode ptr = head;
+                dfs(ptr);
+                return res;
+            }
+            private void dfs(ListNode ptr) {
+                if(ptr.next != null ){
+                    dfs(ptr.next);
+                    temp.next = new ListNode(ptr.val);
+                    temp = temp.next;
+                }
+                else{
+                    res = new ListNode(ptr.val);
+                    temp = res;
+                }
+            }
+        }
+        </details>
+      
+      - <details><summary>遍历方法: 头插法</summary><pre>
+        class Solution {
+            public ListNode reverseList(ListNode head) {
+                if(head == null)
+                    return head;
+                ListNode ans = null;
+                while(head != null){
+                    ListNode h = head.next;
+                    head.next = ans;
+                    ans = head;
+                    head = h;
+                }
+                return ans;
+            }
+        }
     
+  - #### 5) [328. 奇偶链表 20200711](https://leetcode-cn.com/problems/odd-even-linked-list/)
+    
+      - **示例:**
+      
       ```
       输入: 2->1->3->5->6->4->7->NULL 
       输出: 2->3->6->7->1->5->4->NULL
       ```
-    
-    - <details><summary>用两个指针交替拆线将原链表分成两个分别保存奇偶序号节点的链表, 最终完成拼接</summary><pre>
-      class Solution {
-          public ListNode oddEvenList(ListNode head) {
-              if(head == null || head.next == null)
-                  return head;
-              ListNode odd_tail = head;
-              ListNode even_head = head.next;
-              ListNode even_tail = even_head;
-              ListNode t;
-              while(even_tail != null && even_tail.next != null) {
-                  odd_tail.next = even_tail.next;
-                  odd_tail = odd_tail.next;
-                  even_tail.next = odd_tail.next;
-                  even_tail = even_tail.next;
-              }
-              odd_tail.next = even_head;
-              return head;
-          }
-      }
-      最终会出现两种情况:
-      	1) odd_tail -> even_tail(null) 
-      	2) odd_tail -> even_tail -> null
-      在 odd_tail.next = even_head; 后都能完成拼接操作.
-    
+      
+      - <details><summary>用两个指针交替拆线将原链表分成两个分别保存奇偶序号节点的链表, 最终完成拼接</summary><pre>
+        class Solution {
+            public ListNode oddEvenList(ListNode head) {
+                if(head == null || head.next == null)
+                    return head;
+                ListNode odd_tail = head;
+                ListNode even_head = head.next;
+                ListNode even_tail = even_head;
+                ListNode t;
+                while(even_tail != null && even_tail.next != null) {
+                    odd_tail.next = even_tail.next;
+                    odd_tail = odd_tail.next;
+                    even_tail.next = odd_tail.next;
+                    even_tail = even_tail.next;
+                }
+                odd_tail.next = even_head;
+                return head;
+            }
+        }
+        最终会出现两种情况:
+        	1) odd_tail -> even_tail(null) 
+        	2) odd_tail -> even_tail -> null
+        在 odd_tail.next = even_head; 后都能完成拼接操作.
+      
+      
       ​	
 
 ---
