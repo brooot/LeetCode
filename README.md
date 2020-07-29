@@ -49,7 +49,14 @@ LeetCode
           }
       ```
 
-      
+  * #### 6) [96. 不同的二叉搜索树 20200729](https://leetcode-cn.com/problems/unique-binary-search-trees/)
+
+    * 找到数学公式即可
+    
+  * #### 7) [105. 从前序与中序遍历序列构造二叉树 20200729](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+
+    * 递归
+    * 利用栈遍历
 
 - ## 数组
 
@@ -87,7 +94,7 @@ LeetCode
          }
          ```
 
-  - #### [238. 除自身以外数组的乘积 20200711](https://leetcode-cn.com/problems/product-of-array-except-self/)
+  - #### 2) [238. 除自身以外数组的乘积 20200711](https://leetcode-cn.com/problems/product-of-array-except-self/)
 
     - 分别从左到右和从右到左两趟遍历来计算.
 
@@ -110,7 +117,7 @@ LeetCode
       }
       ```
 
-  - #### [48. 旋转图像 20200715](https://leetcode-cn.com/problems/rotate-image/)
+  - #### 3) [48. 旋转图像 20200715](https://leetcode-cn.com/problems/rotate-image/)
 
     - > 给定一个 *n* × *n* 的二维矩阵表示一个图像。
       >
@@ -121,6 +128,10 @@ LeetCode
     - 方法二: 剥洋葱式层层翻转, 注: 外层循环多一层
 
       ![](https://pic.leetcode-cn.com/12605efb60d2efc64e6ecfcf6562a98a49acb3ce696b0c1ad3da46ab8977fa16-48_angles.png)
+    
+  - #### 4) [64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
+
+    - 将二维dp用一维表示, 在另一个维度里再依次更新
 
 - ## 链表
 
