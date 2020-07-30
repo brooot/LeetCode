@@ -1,6 +1,20 @@
-LeetCode
+### **just code it**
 
- just code it
+
+
+[树](#树)
+
+[数组](#数组)
+
+[栈](#栈)
+
+[链表](#链表)
+
+[动态规划](动态规划)
+
+[回溯](#回溯)
+
+[递归](#递归)
 
 - ## 树
 
@@ -225,8 +239,12 @@ LeetCode
         	2) odd_tail -> even_tail -> null
         在 odd_tail.next = even_head; 后都能完成拼接操作.
       
-      
       ​	
+      
+  - #### 6) [148. 排序链表 20200730](https://leetcode-cn.com/problems/sort-list/)
+  
+      - 归并(用快慢指针找中心点)
+      - 快排序(分为less和more两个子链表, 递归求解)
 
 ---
 
@@ -477,3 +495,4 @@ LeetCode
 
       
 
+[回到顶部](#just code it)
