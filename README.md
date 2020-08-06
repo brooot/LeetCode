@@ -10,11 +10,15 @@
 
 [链表](#链表)
 
-[动态规划](动态规划)
+[动态规划](#动态规划)
 
 [回溯](#回溯)
 
 [递归](#递归)
+
+[排序](#排序)
+
+
 
 - ## 树
 
@@ -74,6 +78,9 @@
 
   8. ##### [236. 二叉树的最近公共祖先 20200801](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 
+     - 使用递归函数 `dfs(root, p, q) ` 返回root的子树是否含有 节点  `p ` 或 ` q` 
+     - 当
+
 - ## 数组
 
   1. ##### [最短无序连续子数组 20200703](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/)
@@ -105,12 +112,12 @@
           return r-l+1;
       }
   }
-  ```
-  
+```
+
   2. #####  [238. 除自身以外数组的乘积 20200711](https://leetcode-cn.com/problems/product-of-array-except-self/)
   
      - 分别从左到右和从右到左两趟遍历来计算.
-  
+
 ```java
   class Solution {
     public int[] productExceptSelf(int[] nums) {
@@ -128,10 +135,10 @@
           return ans;
       }
   }
-  ```
-  
+```
+
   3. #####  [48. 旋转图像 20200715](https://leetcode-cn.com/problems/rotate-image/)
-  
+
   - > 给定一个 *n* × *n* 的二维矩阵表示一个图像。
       >
     > 将图像顺时针旋转 90 度。
@@ -195,7 +202,7 @@
             }
         }
         </details>
-  
+    
       - <details><summary>遍历方法: 头插法</summary><pre>
         class Solution {
             public ListNode reverseList(ListNode head) {
@@ -215,7 +222,7 @@
   5. #####  [328. 奇偶链表 20200711](https://leetcode-cn.com/problems/odd-even-linked-list/)
   
       - **示例:**
-  
+    
       ```
       输入: 2->1->3->5->6->4->7->NULL 
       输出: 2->3->6->7->1->5->4->NULL
@@ -302,7 +309,7 @@
     > 最后取这三部分中的最大值为最终的结果, 使用递归的方式来实现.
     >
     > ![img](https://pic.leetcode-cn.com/a0f0a42149f9cebccb3ea4d8d1901d3d4ce934abd249149e2e6dbe84f17e14c2-01.png)
-  
+
   2. #####  [爬楼梯 20200626](https://leetcode-cn.com/problems/climbing-stairs/submissions/)
 
        - 斐波那契数列, 使用递归或者滚动数组的思想
@@ -315,7 +322,7 @@
      - S<sub>n</sub> = max (S<sub>n-2</sub> + M<sub>n</sub>  ,   S<sub>n-1</sub>)
      - 为了减少空间利用率, 可以用滚动数组的方式.
 
-  4. 
+  4. ##### [739. 每日温度 20200806](https://leetcode-cn.com/problems/daily-temperatures/)
 
 ---
 
@@ -499,6 +506,39 @@
       }
   ```
 
-  4. 
+- ## 排序
+
+  1. ##### [215. 数组中的第K个最大元素 20200806 ***](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)
+
+     - 使用快速排序的思想, 对第k个元素存在的一半进行进一步的递归划分排序
+
+       ```java
+       class Solution {
+           public int[] dailyTemperatures(int[] T){
+               int n = T.length;
+               int[] res = new int[n];
+               for(int i = n - 1; i >= 0; i--){ // 从后往前遍历
+                   int j = i + 1; // 从天的后一天开始查找
+                   while(j < n){
+                       if(T[j] > T[i]){ // 如果遇到更高的温度,便记录其时间跨度
+                           res[i] = j - i;
+                           break;
+                       }else if(res[j] == 0){ // 表示明天温度不比当天高,且明天之后没有更高的温度, 则保持 0
+                           break;
+                       }else {
+                           j += res[j]; // 跳转到从第 j 天跳转到首次温度比它高的那一天
+                       }
+                   }
+               }
+               return res;
+           }
+       }
+       ```
+
+       
+
+  2. 
+
+
 
 [回到顶部](#just_code_it)
