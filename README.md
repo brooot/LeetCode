@@ -202,7 +202,7 @@
             }
         }
         </details>
-    
+      
       - <details><summary>遍历方法: 头插法</summary><pre>
         class Solution {
             public ListNode reverseList(ListNode head) {
@@ -222,7 +222,7 @@
   5. #####  [328. 奇偶链表 20200711](https://leetcode-cn.com/problems/odd-even-linked-list/)
   
       - **示例:**
-    
+      
       ```
       输入: 2->1->3->5->6->4->7->NULL 
       输出: 2->3->6->7->1->5->4->NULL
@@ -323,6 +323,31 @@
      - 为了减少空间利用率, 可以用滚动数组的方式.
 
   4. ##### [739. 每日温度 20200806](https://leetcode-cn.com/problems/daily-temperatures/)
+
+       ```java
+       class Solution {
+           public int[] dailyTemperatures(int[] T){
+               int n = T.length;
+               int[] res = new int[n];
+               for(int i = n - 1; i >= 0; i--){ // 从后往前遍历
+                   int j = i + 1; // 从天的后一天开始查找
+                   while(j < n){
+                       if(T[j] > T[i]){ // 如果遇到更高的温度,便记录其时间跨度
+                           res[i] = j - i;
+                           break;
+                       }else if(res[j] == 0){ // 表示明天温度不比当天高,且明天之后没有更高的温度, 则保持 0
+                           break;
+                       }else {
+                           j += res[j]; // 跳转到从第 j 天跳转到首次温度比它高的那一天
+                       }
+                   }
+               }
+               return res;
+           }
+       }
+       ```
+
+  5. 
 
 ---
 
@@ -512,31 +537,8 @@
 
      - 使用快速排序的思想, 对第k个元素存在的一半进行进一步的递归划分排序
 
-       ```java
-       class Solution {
-           public int[] dailyTemperatures(int[] T){
-               int n = T.length;
-               int[] res = new int[n];
-               for(int i = n - 1; i >= 0; i--){ // 从后往前遍历
-                   int j = i + 1; // 从天的后一天开始查找
-                   while(j < n){
-                       if(T[j] > T[i]){ // 如果遇到更高的温度,便记录其时间跨度
-                           res[i] = j - i;
-                           break;
-                       }else if(res[j] == 0){ // 表示明天温度不比当天高,且明天之后没有更高的温度, 则保持 0
-                           break;
-                       }else {
-                           j += res[j]; // 跳转到从第 j 天跳转到首次温度比它高的那一天
-                       }
-                   }
-               }
-               return res;
-           }
-       }
-       ```
-
        
-
+     
   2. 
 
 
