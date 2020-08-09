@@ -18,6 +18,8 @@
 
 [排序](#排序)
 
+[双指针](#双指针)
+
 
 
 - ## 树
@@ -541,6 +543,51 @@
      
   2. 
 
+  
 
+- ## 双指针
+
+  1. ##### [11. 盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/)
+
+     - ###### 左右夹击, 排除不可能拥有更大容积的情况
+
+     ```java
+     class Solution {
+         public int maxArea(int[] height) {
+             int ans = 0;
+             int left = 0;
+             int right = height.length-1;
+             while(left < right){
+                 if(height[left] > height[right]){
+                     // 取右边的高度为高
+                     int cap_height = height[right];
+                     int cap = (right - left) * cap_height; // 计算容积
+                     if(cap > ans) // 更新最大容积
+                         ans = cap;
+                         
+                     /*排除容积不可能更大的情况*/
+                     --right;
+                     while(height[right] <= cap_height && left < right)
+                         --right;
+                 }
+                 else{
+                     // 取左边的高度为高
+                     int cap_height = height[left];
+                     int cap = (right - left) * cap_height; // 计算容积
+                     if(cap > ans) // 更新最大容积
+                         ans = cap;
+     
+                     /*排除容积不可能更大的情况*/
+                     ++left;
+                     while(height[left] <= cap_height && left < right)
+                         ++left;
+                 }
+             }
+             return ans;
+         }
+     }
+     ```
+
+     
 
 [回到顶部](#just_code_it)
