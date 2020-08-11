@@ -8,6 +8,8 @@
 
 [栈](#栈)
 
+[队列](#队列)
+
 [链表](#链表)
 
 [动态规划](#动态规划)
@@ -290,6 +292,48 @@
      ```
 
   3. 
+
+
+
+---
+
+
+
+- ## 队列
+  1. ##### [102. 二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+
+     - 开始操作前确定队列中的该层节点个数, 依次将上层元素放入新数组中并出队列, 将下层元素依次入队列
+
+     ```java
+     class Solution {
+         public List<List<Integer>> levelOrder(TreeNode root) {
+             List<List<Integer>> ans = new ArrayList();
+             if(root == null) {
+                 return ans;
+             }
+             else{
+                 Queue queue = new LinkedList<TreeNode>();
+                 queue.add(root);
+                 while(!queue.isEmpty()){
+                     List<Integer> newList = new ArrayList();
+                     int levelSize = queue.size();
+                     for(int i=0; i<levelSize; i++) {
+                         TreeNode curNode = (TreeNode)queue.poll();
+                         newList.add(curNode.val);
+                         if(curNode.left != null)
+                             queue.add(curNode.left);
+                         if(curNode.right != null)
+                             queue.add(curNode.right);
+                     }
+                     ans.add(newList);
+                 }
+                 return ans;
+             }
+         }
+     }
+     ```
+
+     
 
 
 
