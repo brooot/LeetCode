@@ -144,9 +144,9 @@
   3. #####  [48. 旋转图像 20200715](https://leetcode-cn.com/problems/rotate-image/)
 
   - > 给定一个 *n* × *n* 的二维矩阵表示一个图像。
-      >
+    >
     > 将图像顺时针旋转 90 度。
-  
+
         - 方法一: 先转置矩阵，然后翻转每一行
         - 方法二: 剥洋葱式层层翻转, 注: 外层循环多一层
 
@@ -163,8 +163,11 @@
   6. ##### [287. 寻找重复数 20200731](https://leetcode-cn.com/problems/find-the-duplicate-number/)
 
      - 由于空间复杂度要求为O(1), 不能使用哈希表冲突判断法
-   - 可以使用二分法, 记录左右边界 left 和 right, 每次计算中间值mid, 和在mid左边的数字的数量cnt.  如果 cnt>mid ,   表示重复的数字在cnt左半边, 否则重复的数字在cnt右半边. 当 left == right 的时候 表示找到了重复的数字.
-  
+      - 可以使用二分法, 记录左右边界 left 和 right, 每次计算中间值mid, 和在mid左边的数字的数量cnt.  如果 cnt>mid ,   表示重复的数字在cnt左半边, 否则重复的数字在cnt右半边. 当 left == right 的时候 表示找到了重复的数字.
+     
+  7. ##### [49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)
+
+       - 使用字符串的每一位的ascii码的乘积来过滤字符串
 - ## 链表
 
   1. #####  [编写一个程序，找到两个单链表相交的起始节点 20200624](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
