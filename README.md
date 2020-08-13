@@ -169,6 +169,10 @@
 
        - 使用字符串的每一位的ascii码的乘积来过滤字符串
        - 使用前26个质数分别标识26个字母, 同分异构的单词乘积将是相同的, 不同分的单词乘积极大概率是不同的, 在此题中未出现冲突的现象. 有可能导致溢出, 目前未知是否会出现撞车
+
+  8. ##### [647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)
+
+       - 中间开花法(两种花: 1.有❤ 2.无❤)
 - ## 链表
 
   1. #####  [编写一个程序，找到两个单链表相交的起始节点 20200624](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
