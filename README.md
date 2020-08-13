@@ -83,7 +83,7 @@
   8. ##### [236. 二叉树的最近公共祖先 20200801](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 
      - 使用递归函数 `dfs(root, p, q) ` 返回root的子树是否含有 节点  `p ` 或 ` q` 
-     - 当
+     - 当左右子树分别包含 `p` 和 `q`  或 当前节点是 `p` 或 `q` 和其中一个子树包含另一个的时候 当前节点就是最近公共祖先
 
 - ## 数组
 
