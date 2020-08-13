@@ -89,63 +89,64 @@
 
   1. ##### [最短无序连续子数组 20200703](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/)
 
-       - 自己想的方法是, 从左到右遍历找到逆序中的最小值 min , 并更新当前遇到的最大值,以此来找到右边界; 再从右边届向左遍历, 找出左边界.
+     - 自己想的方法是, 从左到右遍历找到逆序中的最小值 min , 并更新当前遇到的最大值,以此来找到右边界; 再从右边届向左遍历, 找出左边界.
      - 看到两个比较巧妙的方法:
          1. 向右遍历, 用 left = nums.length-1 记录左边界; 记录当前的最大值max_previous; 当遇到cur_Num < max_previous 的时候, 就更新 left 的值 , 试着将所有比 cur_Num 大的数放到 左边界 left 右边去;  同时, 更新 right = cur_Num.index() .  这样 一次遍历就找出了左右边界.
-       2. 使用一次for循环, 分别从两端相向而行来分别更新左右边界, 简洁而巧妙. 
+       2. 使用一次for循环, 分别从两端相向而行来分别更新左右边界, 简洁而巧妙.
+     
+     ```java
+      class Solution {
+         public int findUnsortedSubarray(int[] nums) {
+               int len = nums.length;
+               int max = nums[0];
+               int min = nums[len-1];
+               int l = 0, r = -1;
+               for(int i=0;i<len;i++){
+                   if(max>nums[i]){
+                       r = i;
+                   }else{
+                       max = nums[i];
+                   }
+                   if(min<nums[len-i-1]){
+                       l = len-i-1;
+                   }else{
+                       min = nums[len-i-1];
+                   }
+               }
+               return r-l+1;
+           }
+       }
+     ```
+     
+  2. ##### [238. 除自身以外数组的乘积 20200711](https://leetcode-cn.com/problems/product-of-array-except-self/)
   
-```java
-  class Solution {
-    public int findUnsortedSubarray(int[] nums) {
-          int len = nums.length;
-          int max = nums[0];
-          int min = nums[len-1];
-          int l = 0, r = -1;
-          for(int i=0;i<len;i++){
-              if(max>nums[i]){
-                  r = i;
-              }else{
-                  max = nums[i];
-              }
-              if(min<nums[len-i-1]){
-                  l = len-i-1;
-              }else{
-                  min = nums[len-i-1];
-              }
-          }
-          return r-l+1;
-      }
-  }
-```
-
-  2. #####  [238. 除自身以外数组的乘积 20200711](https://leetcode-cn.com/problems/product-of-array-except-self/)
+       - 分别从左到右和从右到左两趟遍历来计算.
   
-     - 分别从左到右和从右到左两趟遍历来计算.
-
-```java
-  class Solution {
-    public int[] productExceptSelf(int[] nums) {
-          int len = nums.length;
-          int[] ans = new int[len];
-          ans[0] = 1;
-          for(int i=1; i<len; i++) { // 从左到右依次计算得到每个点左边的乘积
-              ans[i] = ans[i-1] * nums[i-1];
-          }
-          int right_multi = nums[len-1];
-          for(int i=len-2; i>=0; i--) { // 从右到左, 依次计算得到右边的乘积并整合
-              ans[i] *= right_multi;
-              right_multi *= nums[i];
-          }
-          return ans;
-      }
-  }
-```
+       ```java
+        class Solution {
+           public int[] productExceptSelf(int[] nums) {
+                 int len = nums.length;
+                 int[] ans = new int[len];
+                 ans[0] = 1;
+                 for(int i=1; i<len; i++) { // 从左到右依次计算得到每个点左边的乘积
+                     ans[i] = ans[i-1] * nums[i-1];
+                 }
+                 int right_multi = nums[len-1];
+                 for(int i=len-2; i>=0; i--) { // 从右到左, 依次计算得到右边的乘积并整合
+                     ans[i] *= right_multi;
+                     right_multi *= nums[i];
+                 }
+                 return ans;
+             }
+         } 
+       ```
+  
 
   3. #####  [48. 旋转图像 20200715](https://leetcode-cn.com/problems/rotate-image/)
 
-  - > 给定一个 *n* × *n* 的二维矩阵表示一个图像。
-    >
-    > 将图像顺时针旋转 90 度。
+       > 给定一个 *n* × *n* 的二维矩阵表示一个图像。
+       >
+       > 将图像顺时针旋转 90 度。
 
         - 方法一: 先转置矩阵，然后翻转每一行
         - 方法二: 剥洋葱式层层翻转, 注: 外层循环多一层
@@ -187,8 +188,7 @@
 
        - 法1: 快慢指针+栈, 在慢指针到达中间的时候开始判断是否回文
        - 法2: 利用快慢指针快速找到中间节点的同时, 将前半部分的链表指针翻转, 再从中间向两端遍历判断是否相同以构成回文. 最后将链表指针顺序恢复. **(空间利用率更低, 速度更快)**
-  
-4. #####  [206. 反转链表 20200710](https://leetcode-cn.com/problems/reverse-linked-list/)
+  4. #####  [206. 反转链表 20200710](https://leetcode-cn.com/problems/reverse-linked-list/)
   
       - <details><summary>递归方法: 先处理后边的, 再处理当前的</summary><pre>
             class Solution {
@@ -411,68 +411,62 @@
 
   1. #####  [78.子集 20200706](https://leetcode-cn.com/problems/subsets/)
 
-    - 
-       遍历思想
-      <details><summary>展开代码</summary><pre>
-      //python3
-      class Solution:
-          def subsets(self, nums: List[int]) -> List[List[int]]:
-              res = [[]]
-              for num in nums:
-                  res += [[num] + arr for arr in res]
-              return res;
-      -----------------------------------------------------------------
-      //java
-      class Solution {
-        public List<List<Integer>> subsets(int[] nums) {
-          List<List<Integer>> res = new ArrayList();
-          res.add(new ArrayList<Integer>());
-          for (int num:nums){
-              List<List<Integer>> tempArr = new ArrayList();
-              for (List<Integer> subArr:res){
-                  tempArr.add(new ArrayList<Integer>(subArr){{add(num);}});
-              }
-              for (List<Integer> arr:tempArr)
-                  res.add(arr);
-          }
-          return res;
-        }
-      }
-      </pre>    
-      </details>
-      
-    - 递归思想
+     <details><summary>遍历思想</summary></summary><pre>
+     //python3
+     class Solution:
+         def subsets(self, nums: List[int]) -> List[List[int]]:
+             res = [[]]
+             for num in nums:
+                 res += [[num] + arr for arr in res]
+             return res;
+     -----------------------------------------------------------------
+     //java
+     class Solution {
+       public List<List<Integer>> subsets(int[] nums) {
+         List<List<Integer>> res = new ArrayList();
+         res.add(new ArrayList<Integer>());
+         for (int num:nums){
+             List<List<Integer>> tempArr = new ArrayList();
+             for (List<Integer> subArr:res){
+                 tempArr.add(new ArrayList<Integer>(subArr){{add(num);}});
+             }
+             for (List<Integer> arr:tempArr)
+                 res.add(arr);
+         }
+         return res;
+       }
+     }
+     </pre>    
+     </details>
 
-        <details><summary>展开代码</summary><pre>
-        class Solution:
-            def subsets(self, nums: List[int]) -> List[List[int]]:
-                res = []
-                n = len(nums)
-                def helper(i, temp):
-                    res.append(temp)
-                    for j in range(i, n):
-                        helper(j+1, temp + [nums[j]])
-                helper(0, [])
-                return res;
-      
-    - java 回溯
+     <details><summary>递归思想</summary><pre>
+     class Solution:
+         def subsets(self, nums: List[int]) -> List[List[int]]:
+             res = []
+             n = len(nums)
+             def helper(i, temp):
+                 res.append(temp)
+                 for j in range(i, n):
+                     helper(j+1, temp + [nums[j]])
+             helper(0, [])
+             return res;
 
-      <details><summary>展开代码</summary><pre>
-      class Solution {
-        public List<List<Integer>> subsets(int[] nums) {
-          List<List<Integer>> res = new ArrayList();
-          backtrack(0, nums, res, new ArrayList<Integer>());
-          return res;
-        }
-        public void backtrack(int i, int[] nums, List<List<Integer>> res, ArrayList<Integer> temp) {
-          res.add(new ArrayList<Integer>(temp));
-          for (int j=i; j<>nums.length; j++) {
-              temp.add(nums[j]);
-              backtrack(j+1, nums, res, temp);
-              temp.remove(temp.size()-1);
-          }
-        }
-      }
+     <details><summary>回溯思想</summary><pre>
+     class Solution {
+       public List<List<Integer>> subsets(int[] nums) {
+         List<List<Integer>> res = new ArrayList();
+         backtrack(0, nums, res, new ArrayList<Integer>());
+         return res;
+       }
+       public void backtrack(int i, int[] nums, List<List<Integer>> res, ArrayList<Integer> temp) {
+         res.add(new ArrayList<Integer>(temp));
+         for (int j=i; j<>nums.length; j++) {
+             temp.add(nums[j]);
+             backtrack(j+1, nums, res, temp);
+             temp.remove(temp.size()-1);
+         }
+       }
+     }
 
   2. #####  [全排列 20200706](https://leetcode-cn.com/problems/permutations/)
 
@@ -498,11 +492,8 @@
 
   3. #####  [39. 组合总和 20200714](https://leetcode-cn.com/problems/combination-sum/)
 
-    - 给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
-
-      candidates 中的数字可以无限制重复被选取。
-
-    - 遍历candidates, 记录path, 记录当前遍历的index, 在未满足条件的情况下使用当前index作为起始点继续寻找, 使得该点能够被重复添加到path中; 在寻找的过程中, 没加入一个点, 就在target中减去这个值, 当target == 0 的时候, 就将path中的点组成的list加入到res中.
+     - 给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。
+       - 遍历candidates, 记录path, 记录当前遍历的index, 在未满足条件的情况下使用当前index作为起始点继续寻找, 使得该点能够被重复添加到path中; 在寻找的过程中, 没加入一个点, 就在target中减去这个值, 当target == 0 的时候, 就将path中的点组成的list加入到res中.
 
   4. 
 
