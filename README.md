@@ -401,7 +401,34 @@
        }
        ```
 
-  5. 
+  5. ##### [62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)
+
+       ![](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/robot_maze.png)
+
+       ```java
+       class Solution {
+           public int uniquePaths(int m, int n) {
+               int[][] T = new int[m][n]; // 用于记录已经计算过的情况
+               return calcu(--m, --n, T); // 此处需要将 m, n 减1 , 因为机器人初试位置已经在横纵都占了一格了
+           }
+       
+           private int calcu(int m, int n, int[][] T) {
+               if(m>0 && n>0){ // 当前点非边缘的时候, 计算方式是两种走法的路径数量和
+                   if(T[m][n] == 0) { // 如果没有计算过, 就计算
+                       int tmp = calcu(m-1, n, T) + calcu(m, n-1, T);
+                       T[m][n] = tmp; // 并记录下来
+                       return tmp;
+                   }else
+                       return T[m][n]; // 如果已经计算过就直接返回
+               }
+               else{
+                   return 1; // 如果是边缘, 就返回 1 , 因为只有一条路径
+               }
+           }
+       }
+       ```
+
+  6. 
 
 ---
 
