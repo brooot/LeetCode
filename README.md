@@ -174,6 +174,33 @@
   8. ##### [647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)
 
        - 中间开花法(两种花: 1.有❤ 2.无❤)
+       
+  9. ##### [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)
+  
+       基本方法:
+  
+       ```python
+       class Solution:
+           def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+               d = {}
+               for i in nums:
+                   if i in d:
+                       d[i] += 1
+                   else:
+                       d[i] = 1
+               d = sorted(d.items(), key=lambda item:item[1], reverse=True)
+               return [i[0] for i in d[:k]]
+       ```
+  
+       couter方法:
+  
+       ```python
+       class Solution:
+           def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+               return [i[0] for i in Counter(nums).most_common(k)]
+       ```
+  
+       
 - ## 链表
 
   1. #####  [编写一个程序，找到两个单链表相交的起始节点 20200624](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
