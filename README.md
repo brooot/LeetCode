@@ -200,7 +200,6 @@
                return [i[0] for i in Counter(nums).most_common(k)]
        ```
   
-       
 - ## 链表
 
   1. #####  [编写一个程序，找到两个单链表相交的起始节点 20200624](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
@@ -455,7 +454,32 @@
        }
        ```
 
-  6. 
+  6. ##### [337. 打家劫舍 III 20200827](https://leetcode-cn.com/problems/house-robber-iii/) 
+  
+       - 每个节点有两种情况, 则有两个不同的输出, 所以想到用数组来表示结果
+  
+            ```java
+            class Solution {
+                public int rob(TreeNode root) {
+                    int[] result = robinterval(root);
+                    return Math.max(result[0], result[1]);
+                }
+            
+                public int[] robinterval(TreeNode root) {
+                    if(root == null) return new int[2];
+                    int result[] = new int[2]; // 下标为0 记录当前节点不抢, 下标为1记录当前节点抢
+                    int[] left = robinterval(root.left);
+                    int[] right = robinterval(root.right);
+                    //当不选当前节点的时候, 从两个子节点中分别选出最大的(子节点抢或不抢)
+                    result[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+                    //当选择当前节点的时候, 两个子节点不能抢
+                    result[1] = root.val + left[0] + right[0];
+                    return result;
+                }
+            }
+            ```
+  
+            
 
 ---
 
