@@ -500,6 +500,31 @@
             }
             ```
   
+  8. ##### [309. 最佳买卖股票时机含冷冻期 20200907](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+  
+       - 将事件分为不同的状态,根据不同的状态之间的关系来写出他们之间的转换方程,这是算法的核心部分
+  
+       - 在程序设计的时候，动态规划的表达式如dp\[i][0] 一般表示第i天结束后的状态为0，记录当天操作后的状态会比较好。
+  
+            ```java
+            class Solution {
+                public int maxProfit(int[] prices) {
+                    int n = prices.length;
+                    if(n == 0) {
+                        return 0;
+                    }
+                    int[][] dp = new int[n][3];
+                    dp[0][1] = -prices[0];
+                    for(int i=1; i<n; i++) {
+                        dp[i][0] = Math.max(dp[i-1][0], dp[i-1][2]); // 可以购买股票
+                        dp[i][1] = Math.max(dp[i-1][1], dp[i-1][0] - prices[i]); // 可以卖出股票
+                        dp[i][2] = dp[i-1][1] + prices[i]; // 在冷冻期
+                    }
+                    return Math.max(dp[n-1][0], dp[n-1][2]);
+                }
+            }
+            ```
+  
             
 
 ---
