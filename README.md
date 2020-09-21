@@ -627,7 +627,52 @@
      - 给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。
        - 遍历candidates, 记录path, 记录当前遍历的index, 在未满足条件的情况下使用当前index作为起始点继续寻找, 使得该点能够被重复添加到path中; 在寻找的过程中, 没加入一个点, 就在target中减去这个值, 当target == 0 的时候, 就将path中的点组成的list加入到res中.
 
-  4. 
+  4. ##### [17. 电话号码的字母组合 20200921](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/) 
+
+      - 本题的实质上可以概括为这样一个模型
+          1. 存在一种一对多的映射 A -> B
+          2. 指定A 中元素的一种排列, 需要得出 A中元素所对应的 所有可能的 B 中元素的排列
+      - 这种全排列问题可以使用回溯法进行一一枚举
+
+      ```java
+      class Solution {
+          public List<String> letterCombinations(String digits) {
+              List<String> combinations = new ArrayList<String>(); // 用来暂存当前的字符列表(会在回溯查找的过程中不断地变化)
+              if(digits.length() == 0) {
+                  return combinations;
+              }
+              Map<Character, String> phoneMap = new HashMap<Character, String>() {{ // 添加map映射
+                  put('2', "abc");
+                  put('3', "def");
+                  put('4', "ghi");
+                  put('5', "jkl");
+                  put('6', "mno");
+                  put('7', "pqrs");
+                  put('8', "tuv");
+                  put('9', "wxyz");
+              }};
+              backtrack(combinations, phoneMap, digits, 0, new StringBuilder()); // 开始查找
+              return combinations;
+          }
+      
+          public void backtrack(List<String> combinations, Map<Character, String> phoneMap, String digits, int index, StringBuilder combination) {
+              if(index == digits.length()) // 当下标等于输入数字字符的长度的时候, 说明一种结果已经产生, 将其加入到结果列表中
+                  combinations.add(combination.toString());
+              else{ // 否则, 继续进行回溯查找
+                  char digit = digits.charAt(index); // index 表示当前combinations中字符串的长度. 使用该长度作为下标索引找出digits中需要新添加的字母所对应的数字.
+                  String letters = phoneMap.get(digit); // 通过该数字, 在map中找到对应的所有字母字符组成的字符串
+                  var lettersCount = letters.length(); // 获取到数字对应的字符的个数, 即字符串的长度
+                  for(int i=0; i<lettersCount; i++) { // 回溯历该字符串中的所有元素, 分别将其加入到暂存字符列表combinations中, 加入后递归进行查找,交给下一层. 在下一层处理完毕退出函数之后, 表示该种可能已经全部考虑完毕,则需要还原查找状态, 删除掉暂存字符列表中的最后一个元素, 便于下一次查找.
+                      combination.append(letters.charAt(i)); 
+                      backtrack(combinations, phoneMap, digits, index + 1, combination);
+                      combination.deleteCharAt(index);
+                  }
+              }
+          }
+      }
+      ```
+
+      
 
 - ## 递归
 
