@@ -22,6 +22,8 @@
 
 [双指针](#双指针)
 
+[并查集](#并查集)
+
 
 
 - ## 树
@@ -815,5 +817,129 @@
      - 遇到0: 将该数字与p1处的数字交换, p1++, curr++(因为此时p1处交换过来的值定为1)
      - 遇到1: curr++
      - 遇到2: curr处数字与p2处交换, p2--,  (curr不能右移, 因为不清楚交换过来的数字是多少, 需要再次判断)
+  
+     ```json
+     class Solution {
+         public void sortColors(int[] nums) {
+             int p1, p2, curr;
+             p1 = 0;
+             p2 = nums.length-1;
+             int tmp;
+             curr = p1;
+             while(curr<=p2) {
+                 if(nums[curr] == 0) {
+                     tmp = nums[curr];
+                     nums[curr++] = nums[p1];
+                     nums[p1++] = tmp;
+                 }
+                 else if(nums[curr] == 2) {
+                     tmp = nums[curr];
+                     nums[curr] = nums[p2];
+                     nums[p2] = tmp;
+                     p2--;
+                 }
+                 else{
+                     curr++;
+                 }
+             }
+         }
+     }
+     ```
+  
+  3. 
+  
+- ## 并查集
+
+  1. ##### [399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)
+
+     >给出方程式 A / B = k, 其中 A 和 B 均为用字符串表示的变量， k 是一个浮点型数字。根据已知方程式求解问题，并返回计算结果。如果结果不存在，则返回 -1.0。
+     >
+     >来源：力扣（LeetCode）
+     >链接：https://leetcode-cn.com/problems/evaluate-division
+     >著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+     - 构建一颗树, 子节点除以父节点 = val[子节点]
+
+     - 构建的过程中, 若两个节点都存在且不在同一颗数上, 则进行合并
+
+       假设 root1 是 a 的根节点,  root2 是 b 的根节点, 且 root1 != root2, 则由
+
+       root1 / root2 = a / b  * val.get(b) / val.get(a) , 可使得
+
+       root1.parent = root2;  val[root1] = a / b  * val[b] / val[a]
+
+     - 最后依次计算, 如果要查询的 from 和 to 有一个不在 森林里面 或者 form 和 to 不在同一颗树中(根节点不同), 则无结果；否则计算 val.get(a) / val.get(b) 就得到了结果,  因为 find() 函数查找根的过程会将节点的"父指针"指向根节点, val.get(x)的值设置成当前节点与根节点的比值。
+
+     ```java
+     class Solution {
+         private Map<String, String> parents;
+         private Map<String, Double> val;
+     
+         private String find(String x) { // 查找根, 并将当前节点的父节点设置为根节点
+             if(!parents.get(x).equals(x)) {
+                 String tmpParient = parents.get(x);
+                 String root = find(tmpParient); // 递归
+                 double oldVal = val.get(x);
+                 val.put(x, oldVal * val.get(tmpParient));
+                 parents.put(x, root);
+             }
+             return parents.get(x);
+         }
+     
+         public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+             parents = new HashMap<>();
+             val = new HashMap<>();
+             int i = 0;
+             double cur;
+             for(List<String> equation:equations) { // 构建树
+                 String from = equation.get(0);
+                 String to = equation.get(1);
+                 cur = values[i];
+                 if (!parents.containsKey(from) && !parents.containsKey(to)) {
+                     parents.put(to, to);
+                     val.put(to, 1.0);
+                     parents.put(from, to);
+                     val.put(from, cur);
+                 } else if (!parents.containsKey(from)) {
+                     parents.put(from, to);
+                     val.put(from, cur);
+                 } else if (!parents.containsKey(to)) {
+                     parents.put(to, from);
+                     val.put(to, 1/cur);
+                 } else {
+                     String pa = find(from);
+                     String pb = find(to);
+                     if(!pa.equals(pb)) {
+                         parents.put(pa, pb);
+                         val.put(pa, cur * val.get(to) / val.get(from));
+                     }
+                 }
+                 i++;
+             }
+             
+             i = 0;
+             double[] res = new double[queries.size()]; 
+             for(List<String> query:queries) { // 开始计算
+                 String from = query.get(0);
+                 String to = query.get(1);
+                 if(!parents.containsKey(from) || !parents.containsKey(to)) {
+     
+                     res[i++] = -1;
+                     continue;
+                 }
+                 String pa = find(from);
+                 String pb = find(to);
+                 if(!pa.equals(pb)) {
+                     res[i++] = -1;
+                 }else{
+                     res[i++] = val.get(from) / val.get(to);
+                 }
+             }
+             return res;
+         }
+     }
+     ```
+
+     
 
 [回到顶部](#just_code_it)
