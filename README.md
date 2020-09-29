@@ -337,7 +337,67 @@
      
      ```
 
-  3. 
+  3. ##### [394. 字符串解码](https://leetcode-cn.com/problems/decode-string/)
+  
+       - 利用栈的思想, 解决其嵌套问题
+  
+            ```java
+            class Solution {
+                int ptr;
+                public String decodeString(String s) {
+                    ptr = 0;
+                    LinkedList<String> stk = new LinkedList<String>();
+                    while(ptr < s.length()) {
+                        char cur = s.charAt(ptr);
+                        if (Character.isDigit(cur)) { // 是数字, 则找出该指针位置开始的连续数字的子串
+                            String digits = getDigits(s);
+                            stk.addLast(digits); //入栈
+                        } else if (Character.isLetter(cur) || cur == '[') { // 字母或者 '['
+                            stk.addLast(String.valueOf(cur)); // 入栈
+                            ptr++;
+                        } else { // 右括号
+                            ptr++;
+                            LinkedList<String> sub = new LinkedList<String>(); //用来存放需要重复的字母的列表
+                            while (!"[".equals(stk.peekLast())) {
+                                sub.addLast(stk.removeLast()); // 获取逆向字母
+                            }
+                            stk.removeLast(); // 左括号出栈
+                            Collections.reverse(sub); // 翻转成正向字母列表
+                            int repNum = Integer.parseInt(stk.removeLast()); // 获取重复次数
+                            StringBuilder sb = new StringBuilder();
+                            String subStr = getString(sub); // 获取子串字符串
+                            while(repNum-- >0) // 根据重复次数重复
+                                sb.append(subStr);
+                            stk.addLast(sb.toString()); // 添加到栈中
+                            
+                        }
+                    }
+                    return getString(stk);
+                }
+            
+                // 获取s字符串中当前指针位置开始的一个数字子字符串
+                private String getDigits(String s) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(s.charAt(ptr++));
+                    while(Character.isDigit(s.charAt(ptr))) {
+                        sb.append(s.charAt(ptr++));
+                    }
+                    return sb.toString();
+                }
+            
+                // 从列表中获取拼接后的字符串
+                private String getString(List<String> strList) {
+                    StringBuilder sb = new StringBuilder();
+                    for(String str:strList) {
+                        sb.append(str);
+                    }   
+                    return sb.toString();
+                }
+            
+            }
+            ```
+  
+            
 
 
 
