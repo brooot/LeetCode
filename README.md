@@ -215,9 +215,9 @@
 - ## 链表
 
   1. #####  [编写一个程序，找到两个单链表相交的起始节点 20200624](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
-  
+
        - [若相交，链表A： a+c, 链表B : b+c.   a+c+b+c = b+c+a+c 。则会在公共处c起点相遇。若不相交，a +b = b+a 。因此相遇处是NULL](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/tu-jie-xiang-jiao-lian-biao-by-user7208t/)
-  
+
   2. #####  [判断链表是否有环 20200629](https://leetcode-cn.com/problems/linked-list-cycle/) 
 
      - 使用快慢指针, 快的步长为2, 慢的步长为1. 如果存在环则快慢指针定会相遇; 否则快指针会先到达链尾
@@ -226,8 +226,9 @@
 
        - 法1: 快慢指针+栈, 在慢指针到达中间的时候开始判断是否回文
        - 法2: 利用快慢指针快速找到中间节点的同时, 将前半部分的链表指针翻转, 再从中间向两端遍历判断是否相同以构成回文. 最后将链表指针顺序恢复. **(空间利用率更低, 速度更快)**
+       
   4. #####  [206. 反转链表 20200710](https://leetcode-cn.com/problems/reverse-linked-list/)
-  
+
       - <details><summary>递归方法: 先处理后边的, 再处理当前的</summary><pre>
             class Solution {
             private ListNode res;
@@ -268,16 +269,16 @@
                 return ans;
             }
         }
-  
+
   5. #####  [328. 奇偶链表 20200711](https://leetcode-cn.com/problems/odd-even-linked-list/)
-  
+
       - **示例:**
       
       ```
       输入: 2->1->3->5->6->4->7->NULL 
       输出: 2->3->6->7->1->5->4->NULL
       ```
-  
+
       - <details><summary>用两个指针交替拆线将原链表分成两个分别保存奇偶序号节点的链表, 最终完成拼接</summary><pre>
         class Solution {
             public ListNode oddEvenList(ListNode head) {
@@ -301,13 +302,30 @@
         	1) odd_tail -> even_tail(null) 
         	2) odd_tail -> even_tail -> null
         在 odd_tail.next = even_head; 后都能完成拼接操作.
-  
+
   6. #####  [148. 排序链表 20200730](https://leetcode-cn.com/problems/sort-list/)
-  
+
       - 归并(用快慢指针找中心点)
       - 快排序(分为less和more两个子链表, 递归求解)
-  
-  7. 
+
+  7. ##### [142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
+
+      > 给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。
+      >
+      > 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
+      >
+      > 说明：不允许修改给定的链表。
+
+      - 使用双指针
+      - 快指针若检测到null, 说明没有环, 返回null
+      - 若出现fast == slow, 则有环
+      - 用 f 表示快指针走的路程, s 表示慢指针走的路程
+      - f = 2s (快指针走的路程是慢指针的2倍)
+      - f = s + nb (快指针比慢指针多走了 n 个环的距离 )
+      - 从上式得到: f = 2nb,  s = nb;  即 快慢指针分别走了2n , n 个环的周长。（n是未知数）
+      - 分析： 从链表头能走到环的入口的步数是 k = a + nb 。 a 是从头到环入口的距离。
+      - 此时只需要让s 再走a 步便能到达环的入口。
+      - 想到让快指针重新指向head，让其与s同步前行，直到两指针相遇， 则说明正好走了a步，而此时快慢指针指向的都是环的入口。
 
 ---
 
