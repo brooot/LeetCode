@@ -131,9 +131,9 @@
      ```
      
   2. ##### [238. 除自身以外数组的乘积 20200711](https://leetcode-cn.com/problems/product-of-array-except-self/)
-  
+
        - 分别从左到右和从右到左两趟遍历来计算.
-  
+
        ```java
         class Solution {
            public int[] productExceptSelf(int[] nums) {
@@ -152,7 +152,7 @@
              }
          } 
        ```
-  
+
 
   3. #####  [48. 旋转图像 20200715](https://leetcode-cn.com/problems/rotate-image/)
 
@@ -188,9 +188,9 @@
        - 中间开花法(两种花: 1.有❤ 2.无❤)
        
   9. ##### [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)
-  
+
        基本方法:
-  
+
        ```python
        class Solution:
            def topKFrequent(self, nums: List[int], k: int) -> List[int]:
@@ -203,15 +203,34 @@
                d = sorted(d.items(), key=lambda item:item[1], reverse=True)
                return [i[0] for i in d[:k]]
        ```
-  
+
        couter方法:
-  
+
        ```python
        class Solution:
            def topKFrequent(self, nums: List[int], k: int) -> List[int]:
                return [i[0] for i in Counter(nums).most_common(k)]
        ```
-  
+       
+  10. ##### [621. 任务调度器](https://leetcode-cn.com/problems/task-scheduler/)
+
+    > 相同任务执行间隔需要有冷却时间n
+
+    - 法一: 对每种任务的数量进行排序 --> 执行n+1 个任务 -->  排序 --> 执行 n+1 个任务 .....  直到所有的任务都执行完
+
+    - 法二: 
+
+      ![Tasks](https://pic.leetcode-cn.com/Figures/621_Task_Scheduler_new.PNG)
+
+      假如A 是任务量最多的任务, 按照任务数量从大到小, 依次纵向插入任务.  由于A已然是任务量最大的任务了, 所以后方的任务要么和A一样多, 在最后一行多加一个, 要么能直接添加到间隙中去. 
+
+      所以
+
+      1. 当间隙未被填满的时候, 总的调度量就是: 剩余的间隙数量 + 总的任务数量.
+      2. 当间隙被填满的时候, 总的调度量是: 总的任务量(间隙被填满, 而且最后一排可能还有多的)
+
+      
+
 - ## 链表
 
   1. #####  [编写一个程序，找到两个单链表相交的起始节点 20200624](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
@@ -1022,9 +1041,9 @@
 
 - ## 图
 
-  1. ##### [207. 课程表](https://leetcode-cn.com/problems/course-schedule/)
+  1. ##### [207. 课程表](https://leetcode-cn.com/problems/course-schedule/) 
 
-     - 法一:  利用队列进行拓扑排序
-     - 法二:  利用dfs查找, 头尾相同的便是环
+     - 法一:  利用队列进行拓扑排序 
+     - 法二:  利用dfs查找, 头尾相同的便是环 
 
 [回到顶部](#just_code_it)
