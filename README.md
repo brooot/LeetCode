@@ -836,26 +836,31 @@
   3. #####  [114. 二叉树展开为链表](https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)
 
        - 在递归中进行变换: 从最底层开始变换(先递归再变换)
+       
+         ```java
+         public void flatten(TreeNode root) {
+                 if(root == null)
+                     return;
+         		/*这两句可以调换顺序, 不影响结果, 区别是默认优先从左子树还是右字数进行变换*/
+                 flatten(root.left); // (1)
+                 flatten(root.right); // (2) 
+         
+                 // 暂存右子树, 左边移到右边, 左边置为空
+                 TreeNode temp = root.right;
+                 root.right = root.left;
+                 root.left = null;
+         
+                 // 移到当前右子树的最右下端, 将旧的右子树接到其下
+                 while(root.right != null)
+                     root = root.right;
+                 root.right = temp;
+             }
+         ```
+       
+  4. ##### [200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
 
-  ```java
-  public void flatten(TreeNode root) {
-          if(root == null)
-              return;
-  		/*这两句可以调换顺序, 不影响结果, 区别是默认优先从左子树还是右字数进行变换*/
-          flatten(root.left); // (1)
-          flatten(root.right); // (2) 
-  
-          // 暂存右子树, 左边移到右边, 左边置为空
-          TreeNode temp = root.right;
-          root.right = root.left;
-          root.left = null;
-  
-          // 移到当前右子树的最右下端, 将旧的右子树接到其下
-          while(root.right != null)
-              root = root.right;
-          root.right = temp;
-      }
-  ```
+       - 在大循环中当遇到没有被访问的点就将大陆数量 + 1,  然后进行深度搜索
+       - 利用深度优先搜索依次对上下左右的临界区域进行判断, 如果仍然是大陆则对其进行通化标记并递归搜索.
 
 - ## 排序
 
