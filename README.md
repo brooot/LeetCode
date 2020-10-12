@@ -637,7 +637,9 @@
             }
             ```
   
-            
+  9. ##### [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
+  
+       - 找到状态转移方程!
 
 ---
 
