@@ -28,6 +28,8 @@
 
 [设计](#设计)
 
+[滑动窗口](#滑动窗口)
+
 
 
 - ## 树
@@ -1118,5 +1120,44 @@
 
      - 利用双向链表+哈希表
      - 双向链表用于更新维护最新被使用的节点
+     
+  2. 
+  
+- ## 滑动窗口
+
+  1. ##### [438. 找到字符串中所有字母异位词 20201013](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)
+
+     ```java
+     class Solution {
+         private List<Integer> l = new ArrayList<>();
+         
+         public List<Integer> findAnagrams(String s, String p) {
+             char[] cs = s.toCharArray(); // 将 s 转为字符数组
+             char[] cp = p.toCharArray(); // 将 p 转为字符数组
+             int[] winFreq = new int[128]; // 滑动窗口的字符出现频率表
+             int[] pFreq = new int[128]; // 字符串数组的字符串出现频率表
+             int left = 0; // 滑动窗口左边界
+             int right = 0; // 滑动窗口右边界
+             for(int i=0; i<cp.length; i++) { // 初始化 p 字符串的字符频率表
+                 pFreq[cp[i] - 'a']++;
+             }
+             while(right < cs.length) {  // 开始查找过程, 条件是 右边界没有超出 cs 的长度
+                 int indexR = cs[right] - 'a'; // 获取滑动窗口右边界对应的字符相对于 'a' 的偏移
+                 right++; // 右边界右移一位
+                 winFreq[indexR]++; // 前右边界对应的字符出现频率 + 1
+                 while(winFreq[indexR] > pFreq[indexR]) { // 当右边界字符在窗口表的出现频率大于p的时候, 需要将滑动窗口的左边界右移
+                     int indexL = cs[left] - 'a'; // 得到左边界对应的字符偏移下标
+                     left++; // 滑动窗口左边界右移一位
+                     winFreq[indexL]--; // 滑动窗口字符频率表中左边界字符对应的频率 - 1
+                 }
+                 if(right - left == cp.length) // 在满足上述可能出现合法情况的条件下, 若再满足子串长度相同的条件, 则可以判定该情况符合题意, 将左边界添加到答案数组中去.
+                     l.add(left);
+             }
+             return l;
+         }
+     }
+     ```
+
+  2. 
 
 [回到顶部](#just_code_it)
