@@ -674,6 +674,23 @@
          }
          ```
   
+  10. ##### [139. 单词拆分](https://leetcode-cn.com/problems/word-break/)
+  
+       - 用数组记录到某一位置下标的子串是否满足条件, 从而进行递进的判断
+  
+         ```python
+         class Solution:
+             def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+                 n = len(s)
+                 dp = [False]*(n+1)
+                 dp[0] = True
+                 for i in range(n):
+                     for j in range(i+1, n+1):
+                         if dp[i] and s[i:j] in wordDict: # 如果i以前都是合法的, 那么遍历从i到j(左闭右开) 判断是否有满足字典中的单词的字符串, 如果有的话就将该dp值置为 True
+                             dp[j] = True
+                 return dp[-1];
+         ```
+  
          
 
 ---
