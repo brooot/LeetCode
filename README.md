@@ -639,7 +639,42 @@
   
   9. ##### [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
   
-       - 找到状态转移方程!
+       - 使用一个 target + 1 大小的数组来记录是否能用数字拼接成该下标的值
+  
+       - 更新该数组, 直到找到 能使得 该数组中 target 为 true 的情况存在, 返回 true;  找不到则返回 false
+  
+         ```java
+         class Solution {
+             public boolean canPartition(int[] nums) {
+                 int len = nums.length; // 获取nums 长度
+                 if (len == 0) 
+                     return false;
+                 
+                 int sum = Arrays.stream(nums).sum(); // 获取数组的和
+         
+                 if((sum & 1) == 1) // 如果和是奇数则直接返回false
+                     return false;
+         
+                 int target = sum / 2; // 获取到平分后的目标值, 也就是每一份应该达到的值, 在找的时候只要找到该值就可以判定是否能平分数组了
+         
+                 boolean[] ok = new boolean[target + 1]; // 该数组用于记录某下标能否由某些数字之和形成
+                 ok[0] = true; // 初始化, 0 是肯定能达成的, 而且对于后续的循环迭代有很重要的作用.
+         
+                 for(int i=0; i<len; i++) {
+                     for(int j=target; j>=0; j--) {
+                         if(ok[j]&&j+nums[i]<=target){ // 每当j是可以形成的, 且 j + nums中的某个数是小于等于目标值target的时候, 就在ok数组中更新该 j + nums[i] 对应的值为true, 表示可以形成该值.
+                             ok[j+nums[i]] = true;
+                             if(j+nums[i] == target) // 而当j + nums[i] 正好等于 target 的时候, 说明找到了某种能平分的解决办法
+                                 return true;
+                         }
+                     }
+                 }
+                 return false;
+             }
+         }
+         ```
+  
+         
 
 ---
 
