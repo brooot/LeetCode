@@ -695,7 +695,7 @@
                  return dp[-1];
          ```
   
-  11. ###### [300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
+  11. ###### [300. 最长上升子序列 2020](https://leetcode-cn.com/problems/longest-increasing-subsequence/) **
   
         1. 法一: 利用动态规划, dp[i] 表示以下标 i 为末尾元素的子串的最大上升子序列的长度
   
