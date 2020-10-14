@@ -695,7 +695,7 @@
                  return dp[-1];
          ```
   
-  11. ###### [300. 最长上升子序列 2020](https://leetcode-cn.com/problems/longest-increasing-subsequence/) **
+  11. ###### [300. 最长上升子序列 20201014](https://leetcode-cn.com/problems/longest-increasing-subsequence/) **
   
         1. 法一: 利用动态规划, dp[i] 表示以下标 i 为末尾元素的子串的最大上升子序列的长度
   
@@ -1182,5 +1182,32 @@
   1. ##### [1002. 查找常用字符](https://leetcode-cn.com/problems/find-common-characters/)
 
      - 利用哈希表去重, 但用数组可能会更快(26位字符的偏移)
+
+  2. ##### [560. 和为K的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)
+
+     - 法一: 暴力遍历
+
+     - 法二: 前缀和 + 哈希表
+
+       ```java
+       public class Solution {
+           public int subarraySum(int[] nums, int k) {
+               int count = 0, pre = 0;
+               HashMap < Integer, Integer > mp = new HashMap < > (); // 利用哈希表记录前缀和以及其个数
+               mp.put(0, 1);
+               for (int i = 0; i < nums.length; i++) {
+                   pre += nums[i];
+                   if (mp.containsKey(pre - k)) { // 当前的前缀和是 pre , 若之前存在前缀和是 pre - k 的情况, 则加上之前这种情况发生的次数
+                       count += mp.get(pre - k);
+                   }
+                   mp.put(pre, mp.getOrDefault(pre, 0) + 1);
+               }
+               return count;
+           }
+       }
+       
+       ```
+
+  3. 
 
 [回到顶部](#just_code_it)
