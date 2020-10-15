@@ -1192,20 +1192,24 @@
        ```java
        public class Solution {
            public int subarraySum(int[] nums, int k) {
-               int count = 0, pre = 0;
-               HashMap < Integer, Integer > mp = new HashMap < > (); // 利用哈希表记录前缀和以及其个数
-               mp.put(0, 1);
-               for (int i = 0; i < nums.length; i++) {
-                   pre += nums[i];
-                   if (mp.containsKey(pre - k)) { // 当前的前缀和是 pre , 若之前存在前缀和是 pre - k 的情况, 则加上之前这种情况发生的次数
-                       count += mp.get(pre - k);
-                   }
-                   mp.put(pre, mp.getOrDefault(pre, 0) + 1);
+               Map<Integer, Integer> pre = new HashMap();
+               int ans = 0, sum = 0;
+               pre.put(0,1); // 此状态很重要, 当从第一项开始计算的和正好等于k的时候需要用该记录来添加匹配项
+               for(int i=0; i<nums.length; i++) {
+                   sum += nums[i];
+       
+                   if(pre.containsKey(sum - k)) // ans 的计算一定要在添加新的key之前 ,  否则新添加的键值对数据将会使得ans的计算产生错误. 原因是 ans 添加的必须得是不算当前数字的之前的所有前缀和的情况, 而加上当前数据后便无法做出准确判断了.
+                       ans += pre.get(sum - k);
+       
+                   if(pre.containsKey(sum))
+                       pre.put(sum, pre.get(sum) + 1);
+                   else
+                       pre.put(sum, 1);
+                   // pre.put(sum, pre.getOrDefault(sum, 0) + 1);
                }
-               return count;
+               return ans;
            }
        }
-       
        ```
 
   3. 
