@@ -879,7 +879,66 @@
       }
       ```
 
-      
+  5. [79. 单词搜索](https://leetcode-cn.com/problems/word-search/)
+
+      - 网格搜索阵列 + 变量私有化 + 访问控制形式的无线性轨迹反馈
+
+          ```java
+          class Solution {
+              private int m, n; // 网格的行数 m , 和列数 n
+              private int[][] direction = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}}; // 四个方向的偏移参数二维列表(常常用在网格搜索当中)
+              private char[][] board;
+              private String word;
+              private boolean[][] visited; // 标记是否已经被访问过
+          
+              public boolean exist(char[][] board, String word) {
+                  this.board = board;
+                  this.word = word;
+                  m = board.length;
+                  if(m == 0)
+                      return false;
+                  n = board[0].length;
+                  this.visited = new boolean[m][n];
+          
+                  // 依次从网格中的每个点作为开头来找
+                  for(int i=0; i<m; i++) {
+                      for(int j=0; j<n; j++) {
+                          if(search(i, j, 0)) // 当搜寻结果为真的时候, 直接返回真
+                              return true;
+                      }
+                  }
+                  return false; //没有找到, 返回假
+              }
+          
+              // 回溯搜索函数
+              private boolean search(int x, int y, int idx) {
+                  if (idx == word.length()-1) { // 当访问到单词的最后一个元素的时候, 直接判断是否相同, 来返回结果
+                      return board[x][y] == word.charAt(idx);
+                  }
+                  if(board[x][y] == word.charAt(idx)) { // 不是最后一个单词, 则需要继续往后查找
+                      visited[x][y] = true; // 访问标记
+                      for(int k=0; k<4; k++) {
+                          int newX = x + direction[k][0];
+                          int newY = y + direction[k][1];
+                          if(inArea(newX, newY) && !visited[newX][newY]) { // 查找的条件是没有超出边界且没有访问过
+                              if(search(newX, newY, idx+1))
+                                  return true;
+                          }
+                      }
+                      visited[x][y] = false; //去除访问标记, 便于回溯
+                  }
+                  return false;
+              }
+          
+              //区域合法性检测
+              private boolean inArea(int x, int y) {
+                  return x>=0 && x<m && y>=0 && y<n;
+              }
+              
+          }
+          ```
+
+  6. 
 
 - ## 递归
 
