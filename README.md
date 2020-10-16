@@ -571,9 +571,9 @@
        ```
 
   6. ##### [337. 打家劫舍 III 20200827](https://leetcode-cn.com/problems/house-robber-iii/) 
-  
+
        - 每个节点有两种情况, 则有两个不同的输出, 所以想到用数组来表示结果
-  
+
             ```java
             class Solution {
                 public int rob(TreeNode root) {
@@ -594,11 +594,11 @@
                 }
             }
             ```
-  
+
   7. ##### [279. 完全平方数 20200904](https://leetcode-cn.com/problems/perfect-squares/)
-  
+
        - 先设置为最大值, 然后通过dp来更新优化
-  
+
             ```java
             class Solution {
                 public int numSquares(int n) {
@@ -615,13 +615,13 @@
                 }
             }
             ```
-  
+
   8. ##### [309. 最佳买卖股票时机含冷冻期 20200907](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
-  
+
        - 将事件分为不同的状态,根据不同的状态之间的关系来写出他们之间的转换方程,这是算法的核心部分
-  
+
        - 在程序设计的时候，动态规划的表达式如dp\[i][0] 一般表示第i天结束后的状态为0，记录当天操作后的状态会比较好。
-  
+
             ```java
             class Solution {
                 public int maxProfit(int[] prices) {
@@ -640,13 +640,13 @@
                 }
             }
             ```
-  
+
   9. ##### [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
-  
+
        - 使用一个 target + 1 大小的数组来记录是否能用数字拼接成该下标的值
-  
+
        - 更新该数组, 直到找到 能使得 该数组中 target 为 true 的情况存在, 返回 true;  找不到则返回 false
-  
+
          ```java
          class Solution {
              public boolean canPartition(int[] nums) {
@@ -677,11 +677,11 @@
              }
          }
          ```
-  
+
   10. ##### [139. 单词拆分](https://leetcode-cn.com/problems/word-break/)
-  
+
        - 用数组记录到某一位置下标的子串是否满足条件, 从而进行递进的判断
-  
+
          ```python
          class Solution:
              def wordBreak(self, s: str, wordDict: List[str]) -> bool:
@@ -694,23 +694,53 @@
                              dp[j] = True
                  return dp[-1];
          ```
-  
+
   11. ###### [300. 最长上升子序列 20201014](https://leetcode-cn.com/problems/longest-increasing-subsequence/) **
-  
+
         1. 法一: 利用动态规划, dp[i] 表示以下标 i 为末尾元素的子串的最大上升子序列的长度
-  
         2. 法二: 
-  
              - 利用贪心的思想, 如果希望上升子序列最长, 则需要让子序列的上升坡度尽可能的缓
-  
              - 维护一个数组 d[] ,  数组的长度 len 表示当前最长子序列的长度,  数组的最后一个元素表示, 当前最长上升子序列的最大元素.
-  
              - 遍历原始序列
-  
                   - 若当前元素nums[i] > d[len] , 则 nums[++len] = nums[i]
                   - 否则在 d 中利用二分查找法找到第一个大于 nums[i] 的元素 K,  并用 nums[i] 替代 K. 
-  
-                  
+
+  12. ##### [494. 目标和](https://leetcode-cn.com/problems/target-sum/)
+
+        - 法1: 深度优先
+
+        - 法2: 二维数组动态规划
+
+        - 法3: 公式法简化问题, 利用一位数组动态规划
+
+          ```java
+          class Solution {
+              /*
+                  nums 中的所有的元素的和记为 sum, 假设nums中存在某一种元素的组合方式 w = x1+x2+...+xk , 使得 sum - 2w = S, 所以 w = (sum - S) / 2 。此时已经获得了 w 的确切值， 但是不知道组成 w 的方式有多少种， 所以想到可以使用动态规划的方式来进行解答， dp[i] 记录 和为 i 的组成方式的个数.
+              */
+              public int findTargetSumWays(int[] nums, int S) {
+                  int sum = 0;
+                  for (int num : nums) {
+                      sum += num;
+                  }
+                  if (sum < S || (sum + S) % 2 == 1) {
+                      return 0;
+                  }
+          
+                  int w = (sum - S) / 2;
+                  int[] dp = new int[w+1];
+                  dp[0] = 1;
+                  for(int num:nums) { // 获取每个迭代的跨度
+                      for(int j=w; j>=num; j--) { // 从所有元素和往下知道到达当前跨度依次尝试有无基于原来和的累加的可能性
+                          dp[j] += dp[j-num];
+                      }
+                  }
+                  return dp[w];
+              }
+          }
+          ```
+
+          
 
 ---
 
