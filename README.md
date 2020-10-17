@@ -220,23 +220,42 @@
        
   10. ##### [621. 任务调度器](https://leetcode-cn.com/problems/task-scheduler/)
 
-> 相同任务执行间隔需要有冷却时间n
+       > 相同任务执行间隔需要有冷却时间n
 
-- 法一: 对每种任务的数量进行排序 --> 执行n+1 个任务 -->  排序 --> 执行 n+1 个任务 .....  直到所有的任务都执行完
+       - 法一: 对每种任务的数量进行排序 --> 执行n+1 个任务 -->  排序 --> 执行 n+1 个任务 .....  直到所有的任务都执行完
 
-- 法二: 
+       - 法二： ![Tasks](https://pic.leetcode-cn.com/Figures/621_Task_Scheduler_new.PNG)
 
-  ![Tasks](https://pic.leetcode-cn.com/Figures/621_Task_Scheduler_new.PNG)
+            假如A 是任务量最多的任务, 按照任务数量从大到小, 依次纵向插入任务.  由于A已然是任务量最大的任务了, 所以后方的任务要么和A一样多, 在最后一行多加一个, 要么能直接添加到间隙中去. 
 
-  假如A 是任务量最多的任务, 按照任务数量从大到小, 依次纵向插入任务.  由于A已然是任务量最大的任务了, 所以后方的任务要么和A一样多, 在最后一行多加一个, 要么能直接添加到间隙中去. 
+            所以
 
-  所以
+            1. 当间隙未被填满的时候, 总的调度量就是: 剩余的间隙数量 + 总的任务数量.
 
-  1. 当间隙未被填满的时候, 总的调度量就是: 剩余的间隙数量 + 总的任务数量.
-  2. 当间隙被填满的时候, 总的调度量是: 总的任务量(间隙被填满, 而且最后一排可能还有多的)
+            2. 当间隙被填满的时候, 总的调度量是: 总的任务量(间隙被填满, 而且最后一排可能还有多的)
+
+               
+
+  11. ##### [56. 合并区间 20201017](https://leetcode-cn.com/problems/merge-intervals/)
+
+        - python 先对左边界排序, 再依据条件依次添加到ans中
+
+             ```python
+             class Solution:
+                 def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+                     newList = sorted(intervals, key=lambda x: x[0])
+                     ans = []
+                     for left, right in newList:
+                         if ans==[] or left > ans[-1][1]: # 新区域的左边界大于ans中最后一个区域的右边界, 则将其直接加入到ans中
+                             ans.append([left, right])
+                         else:
+                             ans[-1][1] = max(right, ans[-1][1]) # 否则, 需要比较新区域的右边界和ans中最后一个区域的右边界的大小来进行合并
+                     return ans
+             ```
+
+             
 
 
-​      
 
 - ## 链表
 
