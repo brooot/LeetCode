@@ -297,7 +297,39 @@
                 }
             ```
 
-  13. 
+  13. ##### [240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)
+
+        - 有序二维数组查找的精髓就在于从右上角开始遍历, 若从左上开始的话则没有一个确定的方向, 向右和向下都是增加. 
+
+        - 而从右上角开始遍历, 则有一个确定的遍历方向, 往左是变小, 往下是变大, 出了边界则是不存在, 十分巧妙
+
+          ```java
+          class Solution {
+              public boolean searchMatrix(int[][] matrix, int target) {
+                  if (matrix.length == 0)
+                      return false;
+          
+                  // 有序二维数组查找的精髓就在于从右上角开始遍历, 若从左上开始的话则没有一个确定的方向, 向右和向下都是增加. 
+                  // 而从右上角开始遍历, 则有一个确定的遍历方向, 往左是变小, 往下是变大, 出了边界则是不存在, 十分巧妙
+                  int col = matrix[0].length - 1;
+                  int row = 0;
+          
+                  while(col>= 0 && row < matrix.length) {
+                      if(matrix[row][col] == target) {
+                          return true;
+                      }
+          
+                      if(matrix[row][col] < target)
+                          row++;
+                      else 
+                          col--;
+                  }
+                  return false;
+              }
+          }
+          ```
+
+          
 
 
 
@@ -803,7 +835,28 @@
           }
           ```
 
-          
+  13. ##### [322. 零钱兑换 20201017](https://leetcode-cn.com/problems/coin-change/)
+
+        - 线性数组 dp
+
+             ```java
+             public class Solution {
+                 public int coinChange(int[] coins, int amount) {
+                     int[] dp = new int[amount+1]; // dp记录和为下标的组合个数
+                     Arrays.fill(dp, amount+1); // 初始化为最大值
+                     dp[0] = 0; // 和为0的个数是0
+                     for(int i=1; i<=amount; i++) { // i 遍历所有可能的和的值
+                         for(int j=0; j<coins.length; j++) { // 遍历所有币的面值
+                             if(coins[j] <= i) // 当面值小于等于和的时候
+                                 dp[i] = Math.min(dp[i], dp[i-coins[j]] + 1); // 更新dp值为当前值和去掉当前面值的可能个数+1
+                         }
+                     }
+                     return dp[amount] > amount ? -1:dp[amount];
+                 }
+             }
+             ```
+
+             
 
 ---
 
