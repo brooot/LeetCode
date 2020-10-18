@@ -253,6 +253,31 @@
                      return ans
              ```
 
+        - java 实现
+
+             ```java
+             class Solution {
+                 public int[][] merge(int[][] intervals) {
+                     if(intervals.length == 0)
+                         return new int[0][2];
+             
+                     // 对二维数组进行排序
+                     Arrays.sort(intervals, (list1, list2) -> list1[0] - list2[0]);
+                     List<int[]> rawAns = new ArrayList();
+                     for(int[] pair:intervals) {
+                         int L = pair[0], R = pair[1]; // 将L, 和R 事先记录下来能够给后期的多次调用节省时间
+                         if (rawAns.size() == 0 || rawAns.get(rawAns.size()-1)[1] < L)
+                             rawAns.add(new int[]{ L, R }); 
+                         else
+                             rawAns.get(rawAns.size()-1)[1] = Math.max(rawAns.get(rawAns.size()-1)[1], R);
+                     }
+                     return rawAns.toArray(new int[rawAns.size()][2]);
+                 }
+             }
+             ```
+
+             
+
   12. ##### [221. 最大正方形 20201017](https://leetcode-cn.com/problems/maximal-square/)
 
         - 暴力法
