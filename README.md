@@ -543,6 +543,43 @@
       - 分析： 从链表头能走到环的入口的步数是 k = a + nb 。 a 是从头到环入口的距离。
       - 此时只需要让s 再走a 步便能到达环的入口。
       - 想到让快指针重新指向head，让其与s同步前行，直到两指针相遇， 则说明正好走了a步，而此时快慢指针指向的都是环的入口。
+      
+  8. ##### [19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)
+  
+      - 双指针, 先让两个指针相隔n, 当后面的指针为null 的之后, 删除前面的指针的后面一个元素(注意: 需要利用辅助头结点)
+  
+          ```java
+          /**
+           * Definition for singly-linked list.
+           * public class ListNode {
+           *     int val;
+           *     ListNode next;
+           *     ListNode() {}
+           *     ListNode(int val) { this.val = val; }
+           *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+           * }
+           */
+          class Solution {
+              public ListNode removeNthFromEnd(ListNode head, int n) {
+                  ListNode dummyHead = new ListNode(0, head); // 在前面建立一个辅助头节点
+                  ListNode left = dummyHead, right = dummyHead; // 初始化两个指针
+          
+                  while (n-- != -1) { // 让右指针向后移动 n + 1 步
+                      right = right.next;
+                  }
+           
+                  while (right != null) { // 当右指针
+                      left = left.next;
+                      right = right.next;
+                  }
+          
+                  left.next = left.next.next;
+                  return dummyHead.next;
+              }
+          }
+          ```
+  
+          
 
 ---
 
