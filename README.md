@@ -952,7 +952,32 @@
              }
              ```
 
-  14. 
+  14. ##### [152. 乘积最大子数组](https://leetcode-cn.com/problems/maximum-product-subarray/)
+  
+        - 由于负数的存在， 需要保存最大和最小值两个变量, 并依据当前值来更新
+  
+             ````java
+             class Solution {
+                 public int maxProduct(int[] nums) {
+                     int max = Integer.MIN_VALUE, imax = 1, imin = 1;
+                     for(int num:nums) {
+                         if(num<0){ // 出现负数, 交换最大和最小
+                             int tmp = imax;
+                             imax = imin;
+                             imin = tmp;
+                         }
+                         // 最大值与当前值相乘, 和当前值进行比较, 取最大的为迭代中的最大值
+                         // 最小值同理
+                         imax = Math.max(imax * num, num); // 更新最大值
+                         imin = Math.min(imin * num, num); // 更新最小值
+                         max = Math.max(max, imax); // 用全局变量max 来记录迭代过程中出现的最大值
+                     }
+                     return max;
+                 }
+             }
+             ````
+  
+             
 
 ---
 
