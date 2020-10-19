@@ -354,7 +354,32 @@
           }
           ```
 
-          
+  14. ##### [55. 跳跃游戏 20201019](https://leetcode-cn.com/problems/jump-game/)
+
+        - 利用贪心思想,  在从左到右的查找过程中维护一个最远可达距离
+
+             ```python
+             class Solution:
+                 def canJump(self, nums: List[int]) -> bool:
+                     if not nums:
+                         return False
+                     if nums[0] == 0 and len(nums) > 1:
+                         return False
+                     if len(nums) == 1:
+                         return True
+                     farthest = 0
+                     n = len(nums)
+                     for i in range(n):
+                         if i <= farthest:
+                             farthest = max(farthest, i+nums[i])
+                             if farthest >= n-1:
+                                 return True
+                         else:
+                             return False
+                     return False
+             ```
+
+             
 
 
 
