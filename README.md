@@ -417,7 +417,39 @@
              }
              ```
              
+      
+  16. ##### [33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
+
+        - 带有双层判断的二分查找, 先找有序的部分, 再判断其中是否包含要查找的元素, 若包含则在该部分查找, 否则去另一边查找
+
+             ```java
+             class Solution {
+                 public int search(int[] nums, int target) {
+                     int lo = 0, hi = nums.length-1;
+                     while(lo <= hi) {
+                         int mid = (lo + hi) / 2;
              
+                         if (nums[mid] == target) // 当找到时, 直接返回其位置
+                             return mid;
+             
+                         if (nums[lo] <= nums[mid]) { // 若左边有序
+                             if (nums[lo] <= target && target < nums[mid]) // 判断其中是否包含target
+                                 hi = mid - 1; // 包含则在其中找
+                             else
+                                 lo = mid + 1; // 不包含则到右边去找
+                         } else { // 左边无序
+                             if (nums[mid] < target && target <= nums[hi]) // 判断右边有序的部分是否包含target
+                                 lo = mid + 1; // 右边有序部分包含target则在右边找
+                             else
+                                 hi = mid - 1; // 右边不包含则回到左边去找
+                         }
+                     }
+                     return -1;
+                 }
+             }
+             ```
+
+  17. 
 
 
 
