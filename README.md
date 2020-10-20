@@ -477,7 +477,46 @@
              }
              ```
 
-  17. 
+  17. ##### [31. 下一个排列](https://leetcode-cn.com/problems/next-permutation/)
+
+        - 先从右到左找到上升点的左边位置 i , 然后再从右往左找比这个值稍大一点的值的位置 j , 交换两个值, 然后翻转 i 右边的元素
+
+             ```java
+             class Solution {
+                 public void nextPermutation(int[] nums) {
+                     int len = nums.length;;
+                     int i = len - 2;
+                     while(i>=0 && nums[i] >= nums[i+1])
+                         i--;
+                     if (i>=0){ // 若当前数已经是最大值了, i = -1
+                         int j = len -1;
+                         while(j>i && nums[i] >= nums[j]) // 找到能使得 nums[j] > nums[i] 的 j
+                             j--;
+                         swap(nums, i, j); // 交换两个值
+                         }
+                     reverse(nums, i+1); // 无论如何, 翻转下标 i 之后的子数组
+                 }
+             
+                 // 翻转函数
+                 private void reverse(int[] nums, int start) {
+                     int end = nums.length-1;
+                     while(start < end) {
+                         swap(nums, start, end);
+                         start++;
+                         end--;
+                     }
+                 }
+             
+                 // 交换两个值的函数
+                 private void swap(int[] nums, int i, int j) {
+                     int tmp = nums[i];
+                     nums[i] = nums[j];
+                     nums[j] = tmp;
+                 }
+             }
+             ```
+
+  18. 
 
 
 
