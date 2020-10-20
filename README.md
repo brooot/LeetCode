@@ -387,44 +387,36 @@
 
              ```java
              class Solution {
-                 // returns leftmost (or rightmost) index at which `target` should be
-                 // inserted in sorted array `nums` via binary search.
-                 private int extremeInsertionIndex(int[] nums, int target, boolean left) {
-                     int lo = 0;
-                     int hi = nums.length;
-             
-                     while (lo < hi) {
-                         int mid = (lo + hi) / 2;
-                         if (nums[mid] > target || (left && target == nums[mid])) { // 仅当
-                             hi = mid;
-                         }
-                         else {
-                             lo = mid+1;
-                         }
-                     }
-             
-                     return lo;
+                 public int[] searchRange(int[] nums, int target) {
+                     int[] ans = {-1, -1};
+                     if (nums == null || nums.length == 0)
+                         return ans;
+                     
+                     int leftIndex = getLeftOrRight(nums, target, true);
+                     
+                     if ( leftIndex == nums.length || nums[leftIndex] != target ) // 要先判断出错的情况, 再判断没有找到的情况 ( 首先保证程序的正常运行! 否则直接调用这个下标会产生下标溢出的错误 )
+                         return ans;
+                     
+                     ans[0] = leftIndex;
+                     ans[1] = getLeftOrRight(nums, target, false);
+                     return ans;
                  }
              
-                 public int[] searchRange(int[] nums, int target) {
-                     int[] targetRange = {-1, -1};
-             
-                     int leftIdx = extremeInsertionIndex(nums, target, true);
-             
-                     // assert that `leftIdx` is within the array bounds and that `target`
-                     // is actually in `nums`.
-                     if (leftIdx == nums.length || nums[leftIdx] != target) {
-                         return targetRange;
+                 private int getLeftOrRight(int[] nums, int target, boolean Left) {
+                     int low = 0;
+                     int high = nums.length;
+                     while(low < high) {
+                         int mid = (low + high) / 2;
+                         if (nums[mid] > target || Left && nums[mid] == target)
+                             high = mid;
+                         else
+                             low = mid + 1;
                      }
-             
-                     targetRange[0] = leftIdx;
-                     targetRange[1] = extremeInsertionIndex(nums, target, false)-1;
-             
-                     return targetRange;
+                     return  Left ? low : low - 1 ; // 当找右边界的时候 需要 - 1 
                  }
              }
              ```
-
+             
              
 
 
