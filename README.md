@@ -631,6 +631,43 @@
           }
           ```
   
+  9. ##### [2. 两数相加](https://leetcode-cn.com/problems/add-two-numbers/)
+  
+      - 依次合并到一个新的链表, 需要一个伪头结点
+  
+      - 需要一个进位变量
+  
+          ```java
+          /**
+           * Definition for singly-linked list.
+           * public class ListNode {
+           *     int val;
+           *     ListNode next;
+           *     ListNode(int x) { val = x; }
+           * }
+           */
+          class Solution {
+              public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+                  ListNode DummyHead = new ListNode(0);
+                  ListNode cur = DummyHead;
+                  int Carry = 0;
+                  while( l1 != null || l2 != null || Carry > 0)
+                  {
+                      int sum = ((l1 != null) ? l1.val : 0) + ((l2 != null) ? l2.val : 0) + Carry;
+                      Carry = sum / 10;
+                      cur.next = new ListNode(sum % 10);
+                      cur = cur.next;
+          
+                      if(l1 != null)
+                          l1 = l1.next;
+                      if(l2 != null)
+                          l2 = l2.next;
+                  }
+                  return DummyHead.next;
+              }
+          }
+          ```
+  
           
 
 ---
