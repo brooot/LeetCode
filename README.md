@@ -110,36 +110,64 @@
      - 自己想的方法是, 从左到右遍历找到逆序中的最小值 min , 并更新当前遇到的最大值,以此来找到右边界; 再从右边届向左遍历, 找出左边界.
      - 看到两个比较巧妙的方法:
          1. 向右遍历, 用 left = nums.length-1 记录左边界; 记录当前的最大值max_previous; 当遇到cur_Num < max_previous 的时候, 就更新 left 的值 , 试着将所有比 cur_Num 大的数放到 左边界 left 右边去;  同时, 更新 right = cur_Num.index() .  这样 一次遍历就找出了左右边界.
-       2. 使用一次for循环, 分别从两端相向而行来分别更新左右边界, 简洁而巧妙.
-     
-     ```java
-      class Solution {
-         public int findUnsortedSubarray(int[] nums) {
-               int len = nums.length;
-               int max = nums[0];
-               int min = nums[len-1];
-               int l = 0, r = -1;
-               for(int i=0;i<len;i++){
-                   if(max>nums[i]){
-                       r = i;
-                   }else{
-                       max = nums[i];
-                   }
-                   if(min<nums[len-i-1]){
-                       l = len-i-1;
-                   }else{
-                       min = nums[len-i-1];
-                   }
-               }
-               return r-l+1;
-           }
-       }
-     ```
+       
+          ```java
+          class Solution {
+              public int findUnsortedSubarray(int[] nums) {
+                  int len = nums.length;
+                  int max = nums[0];
+                  int left = len;
+                  int right = 0;
+                  for (int i=1; i<len; i++) {
+                      if (nums[i] < max) {
+                          right = i;
+                          left = Math.min(i-1, left);
+                          while(left >= 0 && nums[left] > nums[i]) { // 此处直到 nums[left] <= nums[i] 就可以结束了, 所以判断总不需要加 '=' 符号
+                              --left;
+                          }
+                      } else
+                          max = nums[i];
+                  }
+                  // System.out.println(left);
+                  // System.out.println(right);
+                  return right > left ? right - left : 0; // 返回的结果中需要考虑到没有逆序的情况, 所以需要加一个判断
+              }
+          }
+          ```
+       
+          
+       
+     2. 使用一次for循环, 分别从两端相向而行来分别更新左右边界, 简洁而巧妙.
+       
+        ```java
+          class Solution {
+              public int findUnsortedSubarray(int[] nums) {
+                  int len = nums.length;
+                  int max = nums[0];
+                  int min = nums[len-1];
+                  int left = 0, right = -1; // 这样初始化的目的是, 当序列没有出现逆序的情况下, 结果正确, 为 0 
+                  for(int i=1; i<len; i++) {
+                      if (max > nums[i])
+                          right = i;
+                      else
+                          max = nums[i];
+                      
+                      if (min < nums[len-1-i])
+                          left = len-1-i;
+                      else
+                          min = nums[len-1-i];
+                  }
+                  return right - left + 1;
+              }
+          }
+          ```
+       
+          
      
   2. ##### [238. 除自身以外数组的乘积 20200711](https://leetcode-cn.com/problems/product-of-array-except-self/)
-
+  
        - 分别从左到右和从右到左两趟遍历来计算.
-
+  
        ```java
         class Solution {
            public int[] productExceptSelf(int[] nums) {
@@ -1421,8 +1449,8 @@
   
      - 利用滑动窗口思想, 双指针, 左边指针进行遍历, 右边指针向右延伸到无重复的最远端, 每次迭代都更新最长子串的max值, 一次遍历结束后取消左指针所指向的字符占用
   
-       ```
-       /* 此题使用了 char[] 结构, 并没有包括所有的字符情况, 由于测试用例的原因通过了, 但是实际上最好使用map来保证所有的字符都能够被记录*/
+       ```java
+       /* 此题使用了 char[] 结构, 并没有包括所有的字符情况, 由于测试用例的原因通过了, 但是实际上最好使用map来保证所有的字符都能够被记录 */
        class Solution {
            public int lengthOfLongestSubstring(String s) {
                if(s.equals(""))
