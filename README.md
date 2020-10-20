@@ -1417,7 +1417,36 @@
      }
      ```
   
-  3. 
+  3. ##### [3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+  
+     - 利用滑动窗口思想, 双指针, 左边指针进行遍历, 右边指针向右延伸到无重复的最远端, 每次迭代都更新最长子串的max值, 一次遍历结束后取消左指针所指向的字符占用
+  
+       ```
+       /* 此题使用了 char[] 结构, 并没有包括所有的字符情况, 由于测试用例的原因通过了, 但是实际上最好使用map来保证所有的字符都能够被记录*/
+       class Solution {
+           public int lengthOfLongestSubstring(String s) {
+               if(s.equals(""))
+                   return 0;
+               int len = s.length();
+               char[] strArray = s.toCharArray();
+               int[] words = new int[128];
+               int right = -1;
+               int max = 1;
+               for(int left=0; left<len; left++) {
+                   while(right<len-1 && words[strArray[right+1]-' '] != 1) {
+                       ++words[strArray[right+1]-' '];
+                       ++right;
+                   }
+                   max = Math.max(max, right - left + 1);
+                   words[strArray[left]-' '] = 0;
+       
+               }
+               return max;
+           }
+       }
+       ```
+  
+       
   
 - ## 并查集
 
