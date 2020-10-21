@@ -98,10 +98,90 @@
   9. ##### [437. 路径总和 III 20200912](https://leetcode-cn.com/problems/path-sum-iii/) ***
 
        - 用一个 map 来记录前缀和对应的出现的次数
+  - 使用查询 curSum-target 在 map 中的值来得到目标值在树中的路径的条数
+       
+  10. ##### [98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
-       - 使用查询 curSum-target 在 map 中的值来得到目标值在树中的路径的条数
+       - 利用深度优先递归的方法, 但是在递归中加入范围的控制
 
+            ```java
+            /**
+             * Definition for a binary tree node.
+             * public class TreeNode {
+             *     int val;
+             *     TreeNode left;
+             *     TreeNode right;
+             *     TreeNode(int x) { val = x; }
+             * }
+             */
+            class Solution {
+                public boolean isValidBST(TreeNode root) {
+                   return helper(root, null , null);
+                }
             
+                private boolean helper(TreeNode node, Integer lower, Integer upper) { // 注意, 此处的 lower 和 upper 的定义类型需要是 Integer, 凑则无法接收 null 
+                    if (node == null) // 当节点为null 直接返回true
+                        return true;
+            
+                    int value = node.val;
+            
+                    if (lower != null && lower >= value) //超过左边界
+                        return false;
+            
+                    if (upper != null && upper <= value) // 超过右边界
+                        return false;
+            
+                    if (!helper(node.left, lower, value)) // 查看左子节点的有效情况
+                        return false;
+            
+                    if (!helper(node.right, value, upper)) // 查看右子节点的有效情况
+                        return false;
+            
+                    return true;
+                }
+            }
+            ```
+
+       - 中序遍历
+
+            ```java
+            /**
+             * Definition for a binary tree node.
+             * public class TreeNode {
+             *     int val;
+             *     TreeNode left;
+             *     TreeNode right;
+             *     TreeNode(int x) { val = x; }
+             * }
+             */
+            class Solution {
+                public boolean isValidBST(TreeNode root) {
+                    if(root == null)
+                        return true;
+                    Deque<TreeNode> stack = new LinkedList<TreeNode>();
+                    
+                    // 此处的变量用于保存之前的值, 便于在中序遍历的时候判断查找树能否保证后一个数大于前一个数, 由于测试例子中的最小数字可能是Integer.MIN_VALUE = -2147483648 , 在实现中不方便, 所以此处该变量的类型使用了double,  而Double.MIN_VALUE 的值是一个极小的正浮点数, 所以需要使用 -Double.MAX_VALUE
+                    double preNum = -Double.MAX_VALUE; 
+                    
+                    while(!stack.isEmpty() || root != null) { // 栈不为空表示还有未处理的, root不为空表示整个树还没有遍历完成
+                        while(root != null) { // 当root不为空的时候, 需要依次将左边的子节点加入到栈中
+                            stack.push(root);
+                            root = root.left;
+                        }
+                        root = stack.pop(); // 到达了最左的位置
+                        if (root.val <= preNum) // 判断是否符合中序遍历递增的条件
+                            return false;
+                        preNum = root.val; // 记录新的递增判断值
+                        root = root.right; // 由于当前root已然是最左, 需跳转到其右子节点进行遍历, 如果又子节点为null 则会从栈中提取出该节点的父节点进行判断
+                    }
+                    return true;
+                }
+            }
+            ```
+
+  11. 
+
+  
 
 - ## 数组
 
