@@ -99,7 +99,7 @@
 
        - 用一个 map 来记录前缀和对应的出现的次数
   - 使用查询 curSum-target 在 map 中的值来得到目标值在树中的路径的条数
-       
+    
   10. ##### [98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
        - 利用深度优先递归的方法, 但是在递归中加入范围的控制
@@ -216,7 +216,7 @@
           ```
        
           
-       
+     
      2. 使用一次for循环, 分别从两端相向而行来分别更新左右边界, 简洁而巧妙.
        
         ```java
@@ -240,7 +240,7 @@
                   return right - left + 1;
               }
           }
-          ```
+        ```
        
           
      
@@ -596,7 +596,40 @@
              }
              ```
 
-  18. 
+  18. ##### [5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
+
+          -  利用字符数组加快迭代, 将最长子串的下标设置为类的私有变量, 在迭代中更新下标 start 和 end , 同时在每轮迭代的过程先移动end到与start不相同的首位置, 且将idx更新到该位置, 便于下一次的快速迭代
+
+               ```java
+               class Solution {
+                   int start;
+                   int end;
+                   public String longestPalindrome(String s) {
+                       char c[] = s.toCharArray(); // 使用字符数组查找更加快捷
+                       start = end = 0; // 初始化开始和结束点
+                       calLongest(c, 0); // 迭代
+                       return s.substring(start, end);
+                   }
+               
+                   private void calLongest(char[] c, int idx) {
+                       if (idx > c.length-1) return; // 超出范围终止迭代
+                       int start_ = idx, end_ = idx;
+                       while(end_+1 < c.length && c[end_+1] == c[end_]) ++end_;
+                       idx = end_; // 该步骤优化了8ms, 将 idx 移到 重复元素的末尾 end_ 处, 避免重复迭代
+                       while(start_>=0 && end_<c.length && c[start_]==c[end_]) {
+                           start_--;
+                           end_++;
+                       }
+                       if(end_ - start_ -1 > end - start) {
+                           start = start_+1;
+                           end = end_;
+                       }
+                       calLongest(c, idx+1);
+                   }
+               }
+               ```
+
+  19. 
 
 
 
