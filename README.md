@@ -1663,6 +1663,47 @@
        }
        ```
   
+  4. ##### [15. 三数之和](https://leetcode-cn.com/problems/3sum/)
+  
+     - 排序后遍历第一个, 利用双指针指向第一个后面部分的最前和最后位置, 根据目标值的大小判断更新左或右指针
+  
+       ```java
+       class Solution {
+           public List<List<Integer>> threeSum(int[] nums) {
+               List<List<Integer>> res = new ArrayList<List<Integer>>();
+               Arrays.sort(nums); // 排序
+               int len = nums.length; // 获取长度
+               if (len == 0) return res;
+               if (nums[0]<=0 && nums[len-1]>=0) { // 排除数组中清一色是同一个符号情况
+                   for (int i=0; i<len-2;i++) { // 注意! 这里不用递增 i , 在循环末尾会找到下一个和当前元素不同的元素
+                       if (nums[i]>0) break; // 当首个数大于 0 的时候则说明后面的数也都肯定大于 0 了, 不可能产生和为0的情况了
+                       if(i>0 && nums[i] == nums[i-1]) continue;
+                       int first = i+1; // 第二个元素
+                       int last = len-1; // 第三个元素
+                       while(first < last ) { // 开始查找合法的二三个元素
+                           int result = nums[i] + nums[first] + nums[last]; // 获取结果
+                           if (result == 0) {
+                               // List<Integer> tmpArr = new ArrayList<Integer>();
+                               // tmpArr.add(nums[i]);
+                               // tmpArr.add(nums[first]);
+                               // tmpArr.add(nums[last]);
+                               // res.add(tmpArr);
+                               res.add(Arrays.asList(nums[i], nums[first], nums[last])); // 此方法比上面的分步骤运行会更快
+                           }
+                           if (result <= 0 ) { //右移弱的
+                               while(first < last && nums[first] == nums[++first]){};
+                           }
+                           else{ // 左移强的
+                               while(first < last && nums[last] == nums[--last]){};
+                           }
+                       }
+                   }
+               }
+               return res;
+           }
+       }
+       ```
+  
        
   
 - ## 并查集
