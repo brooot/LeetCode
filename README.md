@@ -599,7 +599,7 @@
   18. ##### [5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
 
           -  利用字符数组加快迭代, 将最长子串的下标设置为类的私有变量, 在迭代中更新下标 start 和 end , 同时在每轮迭代的过程先移动end到与start不相同的首位置, 且将idx更新到该位置, 便于下一次的快速迭代
-
+    
                ```java
                class Solution {
                    int start;
@@ -1231,9 +1231,9 @@
              ```
 
   14. ##### [152. 乘积最大子数组](https://leetcode-cn.com/problems/maximum-product-subarray/)
-  
+
         - 由于负数的存在， 需要保存最大和最小值两个变量, 并依据当前值来更新
-  
+
              ````java
              class Solution {
                  public int maxProduct(int[] nums) {
@@ -1254,8 +1254,51 @@
                  }
              }
              ````
-  
+
+  15. ##### [312. 戳气球](https://leetcode-cn.com/problems/burst-balloons/)
+
+        - dp[i][j]表示戳k方案中的最优解, 其中 i<k<j 
+
+             ```java
+             class Solution {
+                 public int maxCoins(int[] nums) {
+                     //避免空指针异常
+                     if (nums == null) {
+                         return 0;
+                     }
              
+                     //创建虚拟边界
+                     int length = nums.length;
+                     int[] nums2 = new int[length + 2];
+                     System.arraycopy(nums, 0, nums2, 1, length);
+                     nums2[0] = 1;
+                     nums2[length + 1] = 1;
+                     length = nums2.length;
+             
+                     //创建dp表
+                     length = nums2.length;
+                     int[][] dp = new int[length][length]; // dp[i][j]表示戳k方案中的最优解, 其中 i<k<j 
+             
+                     //开始dp：i为begin，j为end，k为在i、j区间划分子问题时的边界
+                     for (int i = length - 2; i > -1; i--) {
+                         for (int j = i + 2; j < length; j++) {
+                             //维护一个最大值；如果i、j相邻，值为0
+                             int max = 0;
+                             for (int k = i + 1; k < j; k++) {
+                                 int temp = dp[i][k] + dp[k][j] + nums2[i] * nums2[k] * nums2[j]; // 
+                                 if (temp > max) {
+                                     max = temp;
+                                 }
+                             }
+                             dp[i][j] = max; // 找到戳 i 和 j 中间(不包括i和j)的最大方案
+                         }
+                     }
+                     return dp[0][length-1];
+                 }
+             }
+             ```
+
+  16. 
 
 ---
 
