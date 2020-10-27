@@ -599,7 +599,7 @@
   18. ##### [5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
 
           -  利用字符数组加快迭代, 将最长子串的下标设置为类的私有变量, 在迭代中更新下标 start 和 end , 同时在每轮迭代的过程先移动end到与start不相同的首位置, 且将idx更新到该位置, 便于下一次的快速迭代
-    
+        
                ```java
                class Solution {
                    int start;
@@ -820,7 +820,54 @@
           }
           ```
   
+  10. ##### [23. 合并K个升序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)
+  
+      - 使用二分分治来合并
+  
+          ```java
+          class Solution {
+              //主函数
+              public ListNode mergeKLists(ListNode[] lists) {
+                  return merge(lists, 0, lists.length - 1);
+              }
           
+              //  使用二分分治来合并
+              public ListNode merge(ListNode[] lists, int l, int r) {
+                  if (l == r) {
+                      return lists[l];
+                  }
+                  if (l > r) {
+                      return null;
+                  }
+                  int mid = (l + r) >> 1;
+                  return mergeTwoLists(merge(lists, l, mid), merge(lists, mid + 1, r));
+              }
+          
+              // 合并两个链表
+              public ListNode mergeTwoLists(ListNode a, ListNode b) {
+                  if (a == null || b == null) {
+                      return a != null ? a : b;
+                  }
+                  ListNode head = new ListNode(0);
+                  ListNode tail = head, aPtr = a, bPtr = b;
+                  while (aPtr != null && bPtr != null) {
+                      if (aPtr.val < bPtr.val) {
+                          tail.next = aPtr;
+                          aPtr = aPtr.next;
+                      } else {
+                          tail.next = bPtr;
+                          bPtr = bPtr.next;
+                      }
+                      tail = tail.next;
+                  }
+                  tail.next = (aPtr != null ? aPtr : bPtr);
+                  return head.next;
+              }
+          }
+          
+          ```
+  
+  11. 
 
 ---
 
