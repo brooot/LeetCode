@@ -246,65 +246,65 @@
      
   2. ##### [238. 除自身以外数组的乘积 20200711](https://leetcode-cn.com/problems/product-of-array-except-self/)
   
-       - 分别从左到右和从右到左两趟遍历来计算.
+       - 分别从左到右和从右到左两趟遍历来计算
   
-       ```java
-        class Solution {
-           public int[] productExceptSelf(int[] nums) {
-                 int len = nums.length;
-                 int[] ans = new int[len];
-                 ans[0] = 1;
-                 for(int i=1; i<len; i++) { // 从左到右依次计算得到每个点左边的乘积
-                     ans[i] = ans[i-1] * nums[i-1];
-                 }
-                 int right_multi = nums[len-1];
-                 for(int i=len-2; i>=0; i--) { // 从右到左, 依次计算得到右边的乘积并整合
-                     ans[i] *= right_multi;
-                     right_multi *= nums[i];
-                 }
-                 return ans;
-             }
-         } 
-       ```
-
-
-  3. #####  [48. 旋转图像 20200715](https://leetcode-cn.com/problems/rotate-image/)
-
+         ```java
+          class Solution {
+             public int[] productExceptSelf(int[] nums) {
+                   int len = nums.length;
+                   int[] ans = new int[len];
+                   ans[0] = 1;
+                   for(int i=1; i<len; i++) { // 从左到右依次计算得到每个点左边的乘积
+                       ans[i] = ans[i-1] * nums[i-1];
+                   }
+                   int right_multi = nums[len-1];
+                   for(int i=len-2; i>=0; i--) { // 从右到左, 依次计算得到右边的乘积并整合
+                       ans[i] *= right_multi;
+                       right_multi *= nums[i];
+                   }
+                   return ans;
+               }
+           } 
+         ```
+       
+  3. [48. 旋转图像 20200715](https://leetcode-cn.com/problems/rotate-image/)
+  
        > 给定一个 *n* × *n* 的二维矩阵表示一个图像。
        >
        > 将图像顺时针旋转 90 度。
-
+  
         - 方法一: 先转置矩阵，然后翻转每一行
+  
         - 方法二: 剥洋葱式层层翻转, 注: 外层循环多一层
-
-  ![](https://pic.leetcode-cn.com/12605efb60d2efc64e6ecfcf6562a98a49acb3ce696b0c1ad3da46ab8977fa16-48_angles.png)
-
+  
+          ![](https://pic.leetcode-cn.com/12605efb60d2efc64e6ecfcf6562a98a49acb3ce696b0c1ad3da46ab8977fa16-48_angles.png)
+  
   4. #####  [64. 最小路径和 20200730](https://leetcode-cn.com/problems/minimum-path-sum/)
-
+  
        - 将二维dp用一维表示, 在另一个维度里再依次更新
-
+  
   5. #####  [406. 根据身高重建队列 20200731](https://leetcode-cn.com/problems/queue-reconstruction-by-height/)
-
-     - 先进行二维排序, 再依次按照第二个下标插入新的数组中
-
+  
+       - 先进行二维排序, 再依次按照第二个下标插入新的数组中
+  
   6. ##### [287. 寻找重复数 20200731](https://leetcode-cn.com/problems/find-the-duplicate-number/)
-
-     - 由于空间复杂度要求为O(1), 不能使用哈希表冲突判断法
-      - 可以使用二分法, 记录左右边界 left 和 right, 每次计算中间值mid, 和在mid左边的数字的数量cnt.  如果 cnt>mid ,   表示重复的数字在cnt左半边, 否则重复的数字在cnt右半边. 当 left == right 的时候 表示找到了重复的数字.
-     
+  
+       - 由于空间复杂度要求为O(1), 不能使用哈希表冲突判断法
+        - 可以使用二分法, 记录左右边界 left 和 right, 每次计算中间值mid, 和在mid左边的数字的数量cnt.  如果 cnt>mid ,   表示重复的数字在cnt左半边, 否则重复的数字在cnt右半边. 当 left == right 的时候 表示找到了重复的数字.
+  
   7. ##### [49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)
-
+  
        - 使用字符串的每一位的ascii码的乘积来过滤字符串
        - 使用前26个质数分别标识26个字母, 同分异构的单词乘积将是相同的, 不同分的单词乘积极大概率是不同的, 在此题中未出现冲突的现象. 有可能导致溢出, 目前未知是否会出现撞车
-
+  
   8. ##### [647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)
-
+  
        - 中间开花法(两种花: 1.有❤ 2.无❤)
-       
+  
   9. ##### [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)
-
+  
        基本方法:
-
+  
        ```python
        class Solution:
            def topKFrequent(self, nums: List[int], k: int) -> List[int]:
@@ -317,320 +317,319 @@
                d = sorted(d.items(), key=lambda item:item[1], reverse=True)
                return [i[0] for i in d[:k]]
        ```
-
+  
        couter方法:
-
+  
        ```python
        class Solution:
            def topKFrequent(self, nums: List[int], k: int) -> List[int]:
                return [i[0] for i in Counter(nums).most_common(k)]
        ```
-       
-  10. ##### [621. 任务调度器](https://leetcode-cn.com/problems/task-scheduler/)
-
-       > 相同任务执行间隔需要有冷却时间n
-
-       - 法一: 对每种任务的数量进行排序 --> 执行n+1 个任务 -->  排序 --> 执行 n+1 个任务 .....  直到所有的任务都执行完
-
-       - 法二： ![Tasks](https://pic.leetcode-cn.com/Figures/621_Task_Scheduler_new.PNG)
-
-            假如A 是任务量最多的任务, 按照任务数量从大到小, 依次纵向插入任务.  由于A已然是任务量最大的任务了, 所以后方的任务要么和A一样多, 在最后一行多加一个, 要么能直接添加到间隙中去. 
-
-            所以
-
-            1. 当间隙未被填满的时候, 总的调度量就是: 剩余的间隙数量 + 总的任务数量.
-
-            2. 当间隙被填满的时候, 总的调度量是: 总的任务量(间隙被填满, 而且最后一排可能还有多的)
-
-               
-
-  11. ##### [56. 合并区间 20201017](https://leetcode-cn.com/problems/merge-intervals/)
-
-        - python 先对左边界排序, 再依据条件依次添加到ans中
-
-             ```java
-             class Solution:
-                 def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-                     newList = sorted(intervals, key=lambda x: x[0])
-                     ans = []
-                     for left, right in newList:
-                         if ans==[] or left > ans[-1][1]: # 新区域的左边界大于ans中最后一个区域的右边界, 则将其直接加入到ans中
-                             ans.append([left, right])
-                         else:
-                             ans[-1][1] = max(right, ans[-1][1]) # 否则, 需要比较新区域的右边界和ans中最后一个区域的右边界的大小来进行合并
-                     return ans
-             ```
-
-        - java 实现
-
-             ```java
-             class Solution {
-                 public int[][] merge(int[][] intervals) {
-                     if(intervals.length == 0)
-                         return new int[0][2];
+  
+    10. ##### [621. 任务调度器](https://leetcode-cn.com/problems/task-scheduler/)
+  
+        > 相同任务执行间隔需要有冷却时间n
+  
+        - 法一: 对每种任务的数量进行排序 --> 执行n+1 个任务 -->  排序 --> 执行 n+1 个任务 .....  直到所有的任务都执行完
+  
+        - 法二： ![Tasks](https://pic.leetcode-cn.com/Figures/621_Task_Scheduler_new.PNG)
+  
+          假如A 是任务量最多的任务, 按照任务数量从大到小, 依次纵向插入任务.  由于A已然是任务量最大的任务了, 所以后方的任务要么和A一样多, 在最后一行多加一个, 要么能直接添加到间隙中去. 
+  
+          所以
+  
+          1. 当间隙未被填满的时候, 总的调度量就是: 剩余的间隙数量 + 总的任务数量.
+  
+          2. 当间隙被填满的时候, 总的调度量是: 总的任务量(间隙被填满, 而且最后一排可能还有多的)
+  
              
-                     // 对二维数组进行排序
-                     Arrays.sort(intervals, (list1, list2) -> list1[0] - list2[0]);
-                     List<int[]> rawAns = new ArrayList();
-                     for(int[] pair:intervals) {
-                         int L = pair[0], R = pair[1]; // 将L, 和R 事先记录下来能够给后期的多次调用节省时间
-                         if (rawAns.size() == 0 || rawAns.get(rawAns.size()-1)[1] < L)
-                             rawAns.add(new int[]{ L, R }); 
-                         else
-                             rawAns.get(rawAns.size()-1)[1] = Math.max(rawAns.get(rawAns.size()-1)[1], R);
-                     }
-                     return rawAns.toArray(new int[rawAns.size()][2]);
-                 }
-             }
-             ```
-
-             
-
-  12. ##### [221. 最大正方形 20201017](https://leetcode-cn.com/problems/maximal-square/)
-
-        - 暴力法
-
-          - 遍历矩阵中的每个元素，每次遇到 11，则将该元素作为正方形的左上角；
-
-          - 确定正方形的左上角后，根据左上角所在的行和列计算可能的最大正方形的边长（正方形的范围不能超出矩阵的行数和列数），在该边长范围内寻找只包含 11 的最大正方形；
-
-          - 每次在下方新增一行以及在右方新增一列，判断新增的行和列是否满足所有元素都是 11。
-
-            
-
-        - dp
-
-          - 我们用 **dp(i, j)** 表示以 **dp(i, j)** 为右下角，且只包含 1 的正方形的边长最大值。
-
-          - 如果该位置的值是 0，则 **dp(i, j) = 0**，因为当前位置不可能在由 1 组成的正方形中；
-
-          - 如果该位置的值是 1，则 **dp(i, j)**的值由其上方、左方和左上方的三个相邻位置的 dp值决定。具体而言，当前位置的元素值等于三个相邻位置的元素中的最小值加 1，状态转移方程如下：
-
-            **dp(i, j) = min(    dp(i−1, j),     dp(i−1, j−1),    dp(i, j−1)       ) + 1**
-
-        - dfs
-
-          - 随着深度遍历搜索的进行, 查找的方形的变长也逐次地提升 1
-
-          - 递归的过程加入了行控制, 从某一行开始往下搜索, 进行剪枝
-
-          - 如果以当前坐标为左上角的矩阵是合法的, 那么返回 当前的面积 和 从当前行递归开始查找边长+1的正方形的面积结果中最大的
-
+  
+    11. ##### [56. 合并区间 20201017](https://leetcode-cn.com/problems/merge-intervals/)
+  
+          - python 先对左边界排序, 再依据条件依次添加到ans中
+  
             ```java
-            /* 深度优先遍历 */
-                //              边长        二维输入矩阵    从矩阵的第几号开始找
-                public int dfs(int maLen, char[][] matrix, int k) {
-                    for (int i=k; i <= n-maLen; i++) { // 纵向从第 k 行到能容的下边长为maLen的正方形的行数开始查找
-                        for (int j=0; j <= m-maLen; j++) { // 横向从第一列开始查找
-                            if (judge(maLen, matrix, i, j)) // 如果以当前坐标为左上角的矩阵是合法的, 那么返回 当前的面积 和 从当前行递归开始查找边长+1的正方形的面积结果中最大的
-                                return Math.max(maLen*maLen ,dfs(maLen+1, matrix, i));
+            class Solution:
+                def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+                    newList = sorted(intervals, key=lambda x: x[0])
+                    ans = []
+                    for left, right in newList:
+                        if ans==[] or left > ans[-1][1]: # 新区域的左边界大于ans中最后一个区域的右边界, 则将其直接加入到ans中
+                            ans.append([left, right])
+                        else:
+                            ans[-1][1] = max(right, ans[-1][1]) # 否则, 需要比较新区域的右边界和ans中最后一个区域的右边界的大小来进行合并
+                    return ans
+            ```
+  
+          - java 实现
+  
+            ```java
+            class Solution {
+                public int[][] merge(int[][] intervals) {
+                    if(intervals.length == 0)
+                        return new int[0][2];
+            
+                    // 对二维数组进行排序
+                    Arrays.sort(intervals, (list1, list2) -> list1[0] - list2[0]);
+                    List<int[]> rawAns = new ArrayList();
+                    for(int[] pair:intervals) {
+                        int L = pair[0], R = pair[1]; // 将L, 和R 事先记录下来能够给后期的多次调用节省时间
+                        if (rawAns.size() == 0 || rawAns.get(rawAns.size()-1)[1] < L)
+                            rawAns.add(new int[]{ L, R }); 
+                        else
+                            rawAns.get(rawAns.size()-1)[1] = Math.max(rawAns.get(rawAns.size()-1)[1], R);
+                    }
+                    return rawAns.toArray(new int[rawAns.size()][2]);
+                }
+            }
+            ```
+  
+            
+  
+    12. ##### [221. 最大正方形 20201017](https://leetcode-cn.com/problems/maximal-square/)
+  
+          - 暴力法
+  
+            - 遍历矩阵中的每个元素，每次遇到 11，则将该元素作为正方形的左上角；
+  
+            - 确定正方形的左上角后，根据左上角所在的行和列计算可能的最大正方形的边长（正方形的范围不能超出矩阵的行数和列数），在该边长范围内寻找只包含 11 的最大正方形；
+  
+            - 每次在下方新增一行以及在右方新增一列，判断新增的行和列是否满足所有元素都是 11。
+  
+              
+  
+          - dp
+  
+            - 我们用 **dp(i, j)** 表示以 **dp(i, j)** 为右下角，且只包含 1 的正方形的边长最大值。
+  
+            - 如果该位置的值是 0，则 **dp(i, j) = 0**，因为当前位置不可能在由 1 组成的正方形中；
+  
+            - 如果该位置的值是 1，则 **dp(i, j)**的值由其上方、左方和左上方的三个相邻位置的 dp值决定。具体而言，当前位置的元素值等于三个相邻位置的元素中的最小值加 1，状态转移方程如下：
+  
+              **dp(i, j) = min(    dp(i−1, j),     dp(i−1, j−1),    dp(i, j−1)       ) + 1**
+  
+          - dfs
+  
+            - 随着深度遍历搜索的进行, 查找的方形的变长也逐次地提升 1
+  
+            - 递归的过程加入了行控制, 从某一行开始往下搜索, 进行剪枝
+  
+            - 如果以当前坐标为左上角的矩阵是合法的, 那么返回 当前的面积 和 从当前行递归开始查找边长+1的正方形的面积结果中最大的
+  
+              ```java
+              /* 深度优先遍历 */
+                  //              边长        二维输入矩阵    从矩阵的第几号开始找
+                  public int dfs(int maLen, char[][] matrix, int k) {
+                      for (int i=k; i <= n-maLen; i++) { // 纵向从第 k 行到能容的下边长为maLen的正方形的行数开始查找
+                          for (int j=0; j <= m-maLen; j++) { // 横向从第一列开始查找
+                              if (judge(maLen, matrix, i, j)) // 如果以当前坐标为左上角的矩阵是合法的, 那么返回 当前的面积 和 从当前行递归开始查找边长+1的正方形的面积结果中最大的
+                                  return Math.max(maLen*maLen ,dfs(maLen+1, matrix, i));
+                          }
+                      }
+                      return 0;
+                  }
+              ```
+  
+    13. ##### [240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)
+  
+          - 有序二维数组查找的精髓就在于从右上角开始遍历, 若从左上开始的话则没有一个确定的方向, 向右和向下都是增加. 
+  
+          - 而从右上角开始遍历, 则有一个确定的遍历方向, 往左是变小, 往下是变大, 出了边界则是不存在, 十分巧妙
+  
+            ```java
+            class Solution {
+                public boolean searchMatrix(int[][] matrix, int target) {
+                    if (matrix.length == 0)
+                        return false;
+            
+                    // 有序二维数组查找的精髓就在于从右上角开始遍历, 若从左上开始的话则没有一个确定的方向, 向右和向下都是增加. 
+                    // 而从右上角开始遍历, 则有一个确定的遍历方向, 往左是变小, 往下是变大, 出了边界则是不存在, 十分巧妙
+                    int col = matrix[0].length - 1;
+                    int row = 0;
+            
+                    while(col>= 0 && row < matrix.length) {
+                        if(matrix[row][col] == target) {
+                            return true;
+                        }
+            
+                        if(matrix[row][col] < target)
+                            row++;
+                        else 
+                            col--;
+                    }
+                    return false;
+                }
+            }
+            ```
+  
+    14. ##### [55. 跳跃游戏 20201019](https://leetcode-cn.com/problems/jump-game/)
+  
+          - 利用贪心思想,  在从左到右的查找过程中维护一个最远可达距离
+  
+            ```python
+            class Solution:
+                def canJump(self, nums: List[int]) -> bool:
+                    if not nums:
+                        return False
+                    if nums[0] == 0 and len(nums) > 1:
+                        return False
+                    if len(nums) == 1:
+                        return True
+                    farthest = 0
+                    n = len(nums)
+                    for i in range(n):
+                        if i <= farthest:
+                            farthest = max(farthest, i+nums[i])
+                            if farthest >= n-1:
+                                return True
+                        else:
+                            return False
+                    return False
+            ```
+  
+    15. ##### [34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+  
+          - 普通法
+  
+          - 二分查找(适用于大型的数组)
+  
+            ```java
+            class Solution {
+                public int[] searchRange(int[] nums, int target) {
+                    int[] ans = {-1, -1};
+                    if (nums == null || nums.length == 0)
+                        return ans;
+                    
+                    int leftIndex = getLeftOrRight(nums, target, true);
+                    
+                    if ( leftIndex == nums.length || nums[leftIndex] != target ) // 要先判断出错的情况, 再判断没有找到的情况 ( 首先保证程序的正常运行! 否则直接调用这个下标会产生下标溢出的错误 )
+                        return ans;
+                    
+                    ans[0] = leftIndex;
+                    ans[1] = getLeftOrRight(nums, target, false);
+                    return ans;
+                }
+            
+                private int getLeftOrRight(int[] nums, int target, boolean Left) {
+                    int low = 0;
+                    int high = nums.length;
+                    while(low < high) {
+                        int mid = (low + high) / 2;
+                        if (nums[mid] > target || Left && nums[mid] == target)
+                            high = mid;
+                        else
+                            low = mid + 1;
+                    }
+                    return  Left ? low : low - 1 ; // 当找右边界的时候 需要 - 1 
+                }
+            }
+            ```
+  
+    16. ##### [33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
+  
+          - 带有双层判断的二分查找, 先找有序的部分, 再判断其中是否包含要查找的元素, 若包含则在该部分查找, 否则去另一边查找
+  
+            ```java
+            class Solution {
+                public int search(int[] nums, int target) {
+                    int lo = 0, hi = nums.length-1;
+                    while(lo <= hi) {
+                        int mid = (lo + hi) / 2;
+            
+                        if (nums[mid] == target) // 当找到时, 直接返回其位置
+                            return mid;
+            
+                        if (nums[lo] <= nums[mid]) { // 若左边有序
+                            if (nums[lo] <= target && target < nums[mid]) // 判断其中是否包含target
+                                hi = mid - 1; // 包含则在其中找
+                            else
+                                lo = mid + 1; // 不包含则到右边去找
+                        } else { // 左边无序
+                            if (nums[mid] < target && target <= nums[hi]) // 判断右边有序的部分是否包含target
+                                lo = mid + 1; // 右边有序部分包含target则在右边找
+                            else
+                                hi = mid - 1; // 右边不包含则回到左边去找
                         }
                     }
-                    return 0;
+                    return -1;
                 }
+            }
             ```
-
-  13. ##### [240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)
-
-        - 有序二维数组查找的精髓就在于从右上角开始遍历, 若从左上开始的话则没有一个确定的方向, 向右和向下都是增加. 
-
-        - 而从右上角开始遍历, 则有一个确定的遍历方向, 往左是变小, 往下是变大, 出了边界则是不存在, 十分巧妙
-
-          ```java
-          class Solution {
-              public boolean searchMatrix(int[][] matrix, int target) {
-                  if (matrix.length == 0)
-                      return false;
-          
-                  // 有序二维数组查找的精髓就在于从右上角开始遍历, 若从左上开始的话则没有一个确定的方向, 向右和向下都是增加. 
-                  // 而从右上角开始遍历, 则有一个确定的遍历方向, 往左是变小, 往下是变大, 出了边界则是不存在, 十分巧妙
-                  int col = matrix[0].length - 1;
-                  int row = 0;
-          
-                  while(col>= 0 && row < matrix.length) {
-                      if(matrix[row][col] == target) {
-                          return true;
-                      }
-          
-                      if(matrix[row][col] < target)
-                          row++;
-                      else 
-                          col--;
-                  }
-                  return false;
-              }
-          }
-          ```
-
-  14. ##### [55. 跳跃游戏 20201019](https://leetcode-cn.com/problems/jump-game/)
-
-        - 利用贪心思想,  在从左到右的查找过程中维护一个最远可达距离
-
-             ```python
-             class Solution:
-                 def canJump(self, nums: List[int]) -> bool:
-                     if not nums:
-                         return False
-                     if nums[0] == 0 and len(nums) > 1:
-                         return False
-                     if len(nums) == 1:
-                         return True
-                     farthest = 0
-                     n = len(nums)
-                     for i in range(n):
-                         if i <= farthest:
-                             farthest = max(farthest, i+nums[i])
-                             if farthest >= n-1:
-                                 return True
-                         else:
-                             return False
-                     return False
-             ```
-
-  15. ##### [34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
-
-        - 普通法
-
-        - 二分查找(适用于大型的数组)
-
-             ```java
-             class Solution {
-                 public int[] searchRange(int[] nums, int target) {
-                     int[] ans = {-1, -1};
-                     if (nums == null || nums.length == 0)
-                         return ans;
-                     
-                     int leftIndex = getLeftOrRight(nums, target, true);
-                     
-                     if ( leftIndex == nums.length || nums[leftIndex] != target ) // 要先判断出错的情况, 再判断没有找到的情况 ( 首先保证程序的正常运行! 否则直接调用这个下标会产生下标溢出的错误 )
-                         return ans;
-                     
-                     ans[0] = leftIndex;
-                     ans[1] = getLeftOrRight(nums, target, false);
-                     return ans;
-                 }
-             
-                 private int getLeftOrRight(int[] nums, int target, boolean Left) {
-                     int low = 0;
-                     int high = nums.length;
-                     while(low < high) {
-                         int mid = (low + high) / 2;
-                         if (nums[mid] > target || Left && nums[mid] == target)
-                             high = mid;
-                         else
-                             low = mid + 1;
-                     }
-                     return  Left ? low : low - 1 ; // 当找右边界的时候 需要 - 1 
-                 }
-             }
-             ```
-             
-      
-  16. ##### [33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
-
-        - 带有双层判断的二分查找, 先找有序的部分, 再判断其中是否包含要查找的元素, 若包含则在该部分查找, 否则去另一边查找
-
-             ```java
-             class Solution {
-                 public int search(int[] nums, int target) {
-                     int lo = 0, hi = nums.length-1;
-                     while(lo <= hi) {
-                         int mid = (lo + hi) / 2;
-             
-                         if (nums[mid] == target) // 当找到时, 直接返回其位置
-                             return mid;
-             
-                         if (nums[lo] <= nums[mid]) { // 若左边有序
-                             if (nums[lo] <= target && target < nums[mid]) // 判断其中是否包含target
-                                 hi = mid - 1; // 包含则在其中找
-                             else
-                                 lo = mid + 1; // 不包含则到右边去找
-                         } else { // 左边无序
-                             if (nums[mid] < target && target <= nums[hi]) // 判断右边有序的部分是否包含target
-                                 lo = mid + 1; // 右边有序部分包含target则在右边找
-                             else
-                                 hi = mid - 1; // 右边不包含则回到左边去找
-                         }
-                     }
-                     return -1;
-                 }
-             }
-             ```
-
-  17. ##### [31. 下一个排列](https://leetcode-cn.com/problems/next-permutation/)
-
-        - 先从右到左找到上升点的左边位置 i , 然后再从右往左找比这个值稍大一点的值的位置 j , 交换两个值, 然后翻转 i 右边的元素
-
-             ```java
-             class Solution {
-                 public void nextPermutation(int[] nums) {
-                     int len = nums.length;;
-                     int i = len - 2;
-                     while(i>=0 && nums[i] >= nums[i+1])
-                         i--;
-                     if (i>=0){ // 若当前数已经是最大值了, i = -1
-                         int j = len -1;
-                         while(j>i && nums[i] >= nums[j]) // 找到能使得 nums[j] > nums[i] 的 j
-                             j--;
-                         swap(nums, i, j); // 交换两个值
-                         }
-                     reverse(nums, i+1); // 无论如何, 翻转下标 i 之后的子数组
-                 }
-             
-                 // 翻转函数
-                 private void reverse(int[] nums, int start) {
-                     int end = nums.length-1;
-                     while(start < end) {
-                         swap(nums, start, end);
-                         start++;
-                         end--;
-                     }
-                 }
-             
-                 // 交换两个值的函数
-                 private void swap(int[] nums, int i, int j) {
-                     int tmp = nums[i];
-                     nums[i] = nums[j];
-                     nums[j] = tmp;
-                 }
-             }
-             ```
-
-  18. ##### [5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
-
-          -  利用字符数组加快迭代, 将最长子串的下标设置为类的私有变量, 在迭代中更新下标 start 和 end , 同时在每轮迭代的过程先移动end到与start不相同的首位置, 且将idx更新到该位置, 便于下一次的快速迭代
+  
+    17. ##### [31. 下一个排列](https://leetcode-cn.com/problems/next-permutation/)
+  
+          - 先从右到左找到上升点的左边位置 i , 然后再从右往左找比这个值稍大一点的值的位置 j , 交换两个值, 然后翻转 i 右边的元素
+  
+            ```java
+            class Solution {
+                public void nextPermutation(int[] nums) {
+                    int len = nums.length;;
+                    int i = len - 2;
+                    while(i>=0 && nums[i] >= nums[i+1])
+                        i--;
+                    if (i>=0){ // 若当前数已经是最大值了, i = -1
+                        int j = len -1;
+                        while(j>i && nums[i] >= nums[j]) // 找到能使得 nums[j] > nums[i] 的 j
+                            j--;
+                        swap(nums, i, j); // 交换两个值
+                        }
+                    reverse(nums, i+1); // 无论如何, 翻转下标 i 之后的子数组
+                }
             
-               ```java
-               class Solution {
-                   int start;
-                   int end;
-                   public String longestPalindrome(String s) {
-                       char c[] = s.toCharArray(); // 使用字符数组查找更加快捷
-                       start = end = 0; // 初始化开始和结束点
-                       calLongest(c, 0); // 迭代
-                       return s.substring(start, end);
-                   }
-               
-                   private void calLongest(char[] c, int idx) {
-                       if (idx > c.length-1) return; // 超出范围终止迭代
-                       int start_ = idx, end_ = idx;
-                       while(end_+1 < c.length && c[end_+1] == c[end_]) ++end_;
-                       idx = end_; // 该步骤优化了8ms, 将 idx 移到 重复元素的末尾 end_ 处, 避免重复迭代
-                       while(start_>=0 && end_<c.length && c[start_]==c[end_]) {
-                           start_--;
-                           end_++;
-                       }
-                       if(end_ - start_ -1 > end - start) {
-                           start = start_+1;
-                           end = end_;
-                       }
-                       calLongest(c, idx+1);
-                   }
-               }
-               ```
-
-  19. ##### [42. 接雨水](https://leetcode-cn.com/problems/trapping-rain-water/)
-
+                // 翻转函数
+                private void reverse(int[] nums, int start) {
+                    int end = nums.length-1;
+                    while(start < end) {
+                        swap(nums, start, end);
+                        start++;
+                        end--;
+                    }
+                }
+            
+                // 交换两个值的函数
+                private void swap(int[] nums, int i, int j) {
+                    int tmp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = tmp;
+                }
+            }
+            ```
+  
+    18. ##### [5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
+  
+            -  利用字符数组加快迭代, 将最长子串的下标设置为类的私有变量, 在迭代中更新下标 start 和 end , 同时在每轮迭代的过程先移动end到与start不相同的首位置, 且将idx更新到该位置, 便于下一次的快速迭代
+              
+                 ```java
+                 class Solution {
+                     int start;
+                     int end;
+                     public String longestPalindrome(String s) {
+                         char c[] = s.toCharArray(); // 使用字符数组查找更加快捷
+                         start = end = 0; // 初始化开始和结束点
+                         calLongest(c, 0); // 迭代
+                         return s.substring(start, end);
+                     }
+                 
+                     private void calLongest(char[] c, int idx) {
+                         if (idx > c.length-1) return; // 超出范围终止迭代
+                         int start_ = idx, end_ = idx;
+                         while(end_+1 < c.length && c[end_+1] == c[end_]) ++end_;
+                         idx = end_; // 该步骤优化了8ms, 将 idx 移到 重复元素的末尾 end_ 处, 避免重复迭代
+                         while(start_>=0 && end_<c.length && c[start_]==c[end_]) {
+                             start_--;
+                             end_++;
+                         }
+                         if(end_ - start_ -1 > end - start) {
+                             start = start_+1;
+                             end = end_;
+                         }
+                         calLongest(c, idx+1);
+                     }
+                 }
+                 ```
+  
+    19. ##### [42. 接雨水](https://leetcode-cn.com/problems/trapping-rain-water/)
+  
             - 法一: 从左到右和从右到左分别记录当前最大值, 形成两个列表, 其中重叠部分, 也就是两个列表对应位置的最小值就是地面加上雨水的高度, 再减去地面的高度便得到了雨水的量
             
                  ```java
@@ -657,10 +656,10 @@
                      }
                  }
                  ```
-
-
+  
+  
         ​         
-
+  
             - 法二: 使用双指针的方法, 左右指针分别向中间依次移动, 每当遇到小于等于当前高度的就一直往中间移动, 而当遇到更高的, 则移动过去, 但让另一个指针开始移动
             
                  ```java
@@ -688,10 +687,11 @@
                      return ans;
                  }
                  ```
-
-  20. 
-
-
+  
+  20. ##### [128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)
+  
+        - 法一: 利用map来记录数组中的元素, 当该数可能为连续数字的开头的时候开始计算最长的连续长度, 并维护最大值
+        - 法二: 计算最大和最小的数, 从而建立索引数组, 再计算连续的最长长度是多少
 
 - ## 链表
 
@@ -1856,7 +1856,7 @@
   
        
   
-- ## 并查集
+- ## 并查集***
 
   1. ##### [399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)
 
