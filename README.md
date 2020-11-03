@@ -599,7 +599,7 @@
   18. ##### [5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
 
           -  利用字符数组加快迭代, 将最长子串的下标设置为类的私有变量, 在迭代中更新下标 start 和 end , 同时在每轮迭代的过程先移动end到与start不相同的首位置, 且将idx更新到该位置, 便于下一次的快速迭代
-        
+            
                ```java
                class Solution {
                    int start;
@@ -631,62 +631,63 @@
 
   19. ##### [42. 接雨水](https://leetcode-cn.com/problems/trapping-rain-water/)
 
-          - 法一: 从左到右和从右到左分别记录当前最大值, 形成两个列表, 其中重叠部分, 也就是两个列表对应位置的最小值就是地面加上雨水的高度, 再减去地面的高度便得到了雨水的量
+            - 法一: 从左到右和从右到左分别记录当前最大值, 形成两个列表, 其中重叠部分, 也就是两个列表对应位置的最小值就是地面加上雨水的高度, 再减去地面的高度便得到了雨水的量
+            
+                 ```java
+                 class Solution {
+                     public int trap(int[] height) {
+                         if (height == null || height.length == 0)
+                             return 0;
+                         int ans = 0;
+                         int size = height.length;
+                         int[] left_max = new int[size];
+                         int[] right_max = new int[size];
+                         left_max[0] = height[0];
+                         for (int i = 1; i < size; i++) {
+                             left_max[i] = Math.max(height[i], left_max[i - 1]);
+                         }
+                         right_max[size - 1] = height[size - 1];
+                         for (int i = size - 2; i >= 0; i--) {
+                             right_max[i] = Math.max(height[i], right_max[i + 1]);
+                         }
+                         for (int i = 1; i < size - 1; i++) {
+                             ans += Math.min(left_max[i], right_max[i]) - height[i]; // 重叠部分减去底就是装的水的量
+                         }
+                         return ans;
+                     }
+                 }
+                 ```
 
-               ```java
-               class Solution {
-                   public int trap(int[] height) {
-                       if (height == null || height.length == 0)
-                           return 0;
-                       int ans = 0;
-                       int size = height.length;
-                       int[] left_max = new int[size];
-                       int[] right_max = new int[size];
-                       left_max[0] = height[0];
-                       for (int i = 1; i < size; i++) {
-                           left_max[i] = Math.max(height[i], left_max[i - 1]);
-                       }
-                       right_max[size - 1] = height[size - 1];
-                       for (int i = size - 2; i >= 0; i--) {
-                           right_max[i] = Math.max(height[i], right_max[i + 1]);
-                       }
-                       for (int i = 1; i < size - 1; i++) {
-                           ans += Math.min(left_max[i], right_max[i]) - height[i]; // 重叠部分减去底就是装的水的量
-                       }
-                       return ans;
-                   }
-               }
-               ```
 
-               
+        ​         
 
-          - 法二: 使用双指针的方法, 左右指针分别向中间依次移动, 每当遇到小于等于当前高度的就一直往中间移动, 而当遇到更高的, 则移动过去, 但让另一个指针开始移动
-
-               ```java
-               public int trap(int[] height) {
-                   int left = 0, right = height.length - 1;
-                   int ans = 0;
-                   int left_max = 0, right_max = 0;
-                   while (left < right) {
-                       if (height[left] < height[right]) {
-                           if (height[left] >= left_max) {
-                               left_max = height[left];
-                           } else {
-                               ans += (left_max - height[left]);
-                           }
-                           ++left;
-                       } else {
-                           if (height[right] >= right_max) {
-                               right_max = height[right];
-                           } else {
-                               ans += (right_max - height[right]);
-                           }
-                           --right;
-                       }
-                   }
-                   return ans;
-               }
-               ```
+            - 法二: 使用双指针的方法, 左右指针分别向中间依次移动, 每当遇到小于等于当前高度的就一直往中间移动, 而当遇到更高的, 则移动过去, 但让另一个指针开始移动
+            
+                 ```java
+                 public int trap(int[] height) {
+                     int left = 0, right = height.length - 1;
+                     int ans = 0;
+                     int left_max = 0, right_max = 0;
+                     while (left < right) {
+                         if (height[left] < height[right]) {
+                             if (height[left] >= left_max) {
+                                 left_max = height[left];
+                             } else {
+                                 ans += (left_max - height[left]);
+                             }
+                             ++left;
+                         } else {
+                             if (height[right] >= right_max) {
+                                 right_max = height[right];
+                             } else {
+                                 ans += (right_max - height[right]);
+                             }
+                             --right;
+                         }
+                     }
+                     return ans;
+                 }
+                 ```
 
   20. 
 
@@ -1965,8 +1966,12 @@
      - 利用双向链表+哈希表
      - 双向链表用于更新维护最新被使用的节点
      
-  2. 
-  
+  2. ##### [297. 二叉树的序列化与反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)
+
+     - 利用字符串序列化
+       - StringBuilder
+       - 递归调用
+
 - ## 滑动窗口
 
   1. ##### [438. 找到字符串中所有字母异位词 20201013](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)
