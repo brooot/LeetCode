@@ -264,7 +264,7 @@
                    }
                    return ans;
                }
-           } 
+           }
          ```
        
   3. [48. 旋转图像 20200715](https://leetcode-cn.com/problems/rotate-image/)
@@ -659,7 +659,7 @@
   
   
         ​         
-  
+      
             - 法二: 使用双指针的方法, 左右指针分别向中间依次移动, 每当遇到小于等于当前高度的就一直往中间移动, 而当遇到更高的, 则移动过去, 但让另一个指针开始移动
             
                  ```java
@@ -1017,7 +1017,9 @@
             }
             ```
   
-            
+  4. ##### [84. 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
+  
+       - 利用栈的属性来找到以每个点的高度作为矩形的高的边界
 
 
 
