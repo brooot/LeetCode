@@ -2017,7 +2017,7 @@ class Solution {
    }
    ```
 
-2. ##### [76. 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)
+2. ##### [76. 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/) ****
 
    - 利用128位数组作为map来映射字符
    - 使用distasnce来计算是否满足子串条件
