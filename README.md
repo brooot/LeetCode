@@ -687,7 +687,7 @@ class TrieNode {
                }
                return ans;
            }
-           ```
+```
 ```
 
 20. ##### [128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)
@@ -757,11 +757,11 @@ class TrieNode {
 
     - **示例:**
     
-    ```
+```
     输入: 2->1->3->5->6->4->7->NULL 
     输出: 2->3->6->7->1->5->4->NULL
     ```
-
+    
     - <details><summary>用两个指针交替拆线将原链表分成两个分别保存奇偶序号节点的链表, 最终完成拼接</summary><pre>
       class Solution {
           public ListNode oddEvenList(ListNode head) {
@@ -2017,7 +2017,11 @@ class Solution {
    }
    ```
 
-2. 
+2. ##### [76. 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)
+
+   - 利用128位数组作为map来映射字符
+   - 使用distasnce来计算是否满足子串条件
+   - 先动右边,满足条件了再缩小左边, 看最小能缩小到多少, 记录下来
 
 ## 哈希表
 
