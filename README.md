@@ -1022,6 +1022,8 @@ class TrieNode {
 4. ##### [84. 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
 
      - 利用栈的属性来找到以每个点的高度作为矩形的高的边界
+     
+5. 
 
 
 
