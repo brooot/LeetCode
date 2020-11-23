@@ -1414,6 +1414,12 @@ class TrieNode {
 16. ##### [85. 最大矩形 20201116](https://leetcode-cn.com/problems/maximal-rectangle/)
 
       - 化解为一维数组的柱状图的最大面积问题
+    
+17. ##### [10. 正则表达式匹配](https://leetcode-cn.com/problems/regular-expression-matching/)
+
+      - 关键是找到状态转移方程
+      - f\[i][j] 用来表示 s中第前个元素能否和p中前j个元素匹配上
+      - ![image-20201123154457002](https://raw.githubusercontent.com/brooot/typora-plugin-of-img/master/imgs202011/23/154846-979181.png)
 
 ---
 
