@@ -32,6 +32,8 @@
 
 [哈希表](#哈希表)
 
+[位运算](#位运算)
+
 
 
 ##  树
@@ -2069,5 +2071,11 @@ class Solution {
      ```
 
 3. 
+
+## 位运算
+
+1. ##### [剑指 Offer 15. 二进制中1的个数](https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/)
+
+2. 
 
 [回到顶部](#just_code_it)
