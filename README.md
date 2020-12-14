@@ -634,67 +634,62 @@ class TrieNode {
 
   19. ##### [42. 接雨水](https://leetcode-cn.com/problems/trapping-rain-water/)
 
-          - 法一: 从左到右和从右到左分别记录当前最大值, 形成两个列表, 其中重叠部分, 也就是两个列表对应位置的最小值就是地面加上雨水的高度, 再减去地面的高度便得到了雨水的量
-          
-               ```java
-               class Solution {
-                   public int trap(int[] height) {
-                       if (height == null || height.length == 0)
-                           return 0;
-                       int ans = 0;
-                       int size = height.length;
-                       int[] left_max = new int[size];
-                       int[] right_max = new int[size];
-                       left_max[0] = height[0];
-                       for (int i = 1; i < size; i++) {
-                           left_max[i] = Math.max(height[i], left_max[i - 1]);
-                       }
-                       right_max[size - 1] = height[size - 1];
-                       for (int i = size - 2; i >= 0; i--) {
-                           right_max[i] = Math.max(height[i], right_max[i + 1]);
-                       }
-                       for (int i = 1; i < size - 1; i++) {
-                           ans += Math.min(left_max[i], right_max[i]) - height[i]; // 重叠部分减去底就是装的水的量
-                       }
-                       return ans;
-                   }
-               }
-               ```
-
-
-```
-  ​         
-
-      - 法二: 使用双指针的方法, 左右指针分别向中间依次移动, 每当遇到小于等于当前高度的就一直往中间移动, 而当遇到更高的, 则移动过去, 但让另一个指针开始移动
+      法一: 从左到右和从右到左分别记录当前最大值, 形成两个列表, 其中重叠部分, 也就是两个列表对应位置的最小值就是地面加上雨水的高度, 再减去地面的高度便得到了雨水的量
       
-           ```java
+      ```java
+        class Solution {
            public int trap(int[] height) {
-               int left = 0, right = height.length - 1;
+               if (height == null || height.length == 0)
+                   return 0;
                int ans = 0;
-               int left_max = 0, right_max = 0;
-               while (left < right) {
-                   if (height[left] < height[right]) {
-                       if (height[left] >= left_max) {
-                           left_max = height[left];
-                       } else {
-                           ans += (left_max - height[left]);
-                       }
-                       ++left;
-                   } else {
-                       if (height[right] >= right_max) {
-                           right_max = height[right];
-                       } else {
-                           ans += (right_max - height[right]);
-                       }
-                       --right;
-                   }
+               int size = height.length;
+               int[] left_max = new int[size];
+               int[] right_max = new int[size];
+               left_max[0] = height[0];
+               for (int i = 1; i < size; i++) {
+                   left_max[i] = Math.max(height[i], left_max[i - 1]);
+               }
+               right_max[size - 1] = height[size - 1];
+               for (int i = size - 2; i >= 0; i--) {
+                   right_max[i] = Math.max(height[i], right_max[i + 1]);
+               }
+               for (int i = 1; i < size - 1; i++) {
+                   ans += Math.min(left_max[i], right_max[i]) - height[i]; // 重叠部分减去底就是装的水的量
                }
                return ans;
            }
-```
-```
+       }
+      ```
+      
+      法二: 使用双指针的方法, 左右指针分别向中间依次移动, 每当遇到小于等于当前高度的就一直往中间移动, 而当遇到更高的, 则移动过去, 但让另一个指针开始移动
+      
+      ```java
+         public int trap(int[] height) {
+             int left = 0, right = height.length - 1;
+             int ans = 0;
+             int left_max = 0, right_max = 0;
+             while (left < right) {
+                 if (height[left] < height[right]) {
+                     if (height[left] >= left_max) {
+                         left_max = height[left];
+                     } else {
+                         ans += (left_max - height[left]);
+                     }
+                     ++left;
+                 } else {
+                     if (height[right] >= right_max) {
+                         right_max = height[right];
+                     } else {
+                         ans += (right_max - height[right]);
+                     }
+                     --right;
+                 }
+             }
+             return ans;
+         }
+      ```
 
-20. ##### [128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)
+   20. ##### [128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)
 
       - 法一: 利用map来记录数组中的元素, 当该数可能为连续数字的开头的时候开始计算最长的连续长度, 并维护最大值
       - 法二: 计算最大和最小的数, 从而建立索引数组, 再计算连续的最长长度是多少
@@ -760,36 +755,34 @@ class TrieNode {
 5. #####  [328. 奇偶链表 20200711](https://leetcode-cn.com/problems/odd-even-linked-list/)
 
     - **示例:**
-    
-```
-    输入: 2->1->3->5->6->4->7->NULL 
-    输出: 2->3->6->7->1->5->4->NULL
-    ```
+
+    	输入: 2->1->3->5->6->4->7->NULL 
+    	输出: 2->3->6->7->1->5->4->NULL
     
     - <details><summary>用两个指针交替拆线将原链表分成两个分别保存奇偶序号节点的链表, 最终完成拼接</summary><pre>
-      class Solution {
-          public ListNode oddEvenList(ListNode head) {
-              if(head == null || head.next == null)
+          class Solution {
+              public ListNode oddEvenList(ListNode head) {
+                  if(head == null || head.next == null)
+                      return head;
+                  ListNode odd_tail = head;
+                  ListNode even_head = head.next;
+                  ListNode even_tail = even_head;
+                  ListNode t;
+                  while(even_tail != null && even_tail.next != null) {
+                      odd_tail.next = even_tail.next;
+                      odd_tail = odd_tail.next;
+                      even_tail.next = odd_tail.next;
+                      even_tail = even_tail.next;
+                  }
+                  odd_tail.next = even_head;
                   return head;
-              ListNode odd_tail = head;
-              ListNode even_head = head.next;
-              ListNode even_tail = even_head;
-              ListNode t;
-              while(even_tail != null && even_tail.next != null) {
-                  odd_tail.next = even_tail.next;
-                  odd_tail = odd_tail.next;
-                  even_tail.next = odd_tail.next;
-                  even_tail = even_tail.next;
               }
-              odd_tail.next = even_head;
-              return head;
           }
-      }
-      最终会出现两种情况:
-      	1) odd_tail -> even_tail(null) 
-      	2) odd_tail -> even_tail -> null
-      在 odd_tail.next = even_head; 后都能完成拼接操作.
-
+          最终会出现两种情况:
+          	1) odd_tail -> even_tail(null) 
+          	2) odd_tail -> even_tail -> null
+          在 odd_tail.next = even_head; 后都能完成拼接操作.
+    
 6. #####  [148. 排序链表 20200730](https://leetcode-cn.com/problems/sort-list/)
 
     - 归并(用快慢指针找中心点)
@@ -813,7 +806,7 @@ class TrieNode {
     - 分析： 从链表头能走到环的入口的步数是 k = a + nb 。 a 是从头到环入口的距离。
     - 此时只需要让s 再走a 步便能到达环的入口。
     - 想到让快指针重新指向head，让其与s同步前行，直到两指针相遇， 则说明正好走了a步，而此时快慢指针指向的都是环的入口。
-    
+
 8. ##### [19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)
 
     - 双指针, 先让两个指针相隔n, 当后面的指针为null 的之后, 删除前面的指针的后面一个元素(注意: 需要利用辅助头结点)
@@ -848,6 +841,8 @@ class TrieNode {
             }
         }
         ```
+
+
 
 9. ##### [2. 两数相加](https://leetcode-cn.com/problems/add-two-numbers/)
 
