@@ -1027,7 +1027,9 @@ class TrieNode {
 
      - 利用栈的属性来找到以每个点的高度作为矩形的高的边界
      
-5. 
+5. ##### [剑指 Offer 09. 用两个栈实现队列](https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/)
+
+     
 
 
 
