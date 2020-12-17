@@ -936,6 +936,10 @@ class TrieNode {
 
      - [公式法 ](https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/solution/xiang-jie-hua-dong-chuang-kou-fa-qiu-gen-fa-jian-g/)
 
+12. ##### [剑指 Offer 35. 复杂链表的复制](https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/)
+
+     - dfs方法通过
+
 ---
 
 
