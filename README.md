@@ -1720,9 +1720,11 @@ class Solution {
 
    - 使用递归方法, 计算每个节点为根所能达到的最大值, 在递归中更新ans
    
-6. 
+6. ##### [剑指 Offer 10- II. 青蛙跳台阶问题](https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/)
 
-7.   
+     - 可以利用斐波那契数列和3个变量来循环求解
+
+7. 
 
 ## 排序
 
