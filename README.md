@@ -189,7 +189,11 @@ class TrieNode {
 
     - 利用搜索树的有序性质加速查找
 
-14. 
+14. ##### [剑指 Offer 32 - II. 从上到下打印二叉树 II](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/)
+
+15. ##### [剑指 Offer 39. 数组中出现次数超过一半的数字](https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/)
+
+16. 
 
 
 
