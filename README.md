@@ -945,6 +945,8 @@ class TrieNode {
 12. ##### [剑指 Offer 35. 复杂链表的复制](https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/)
 
      - dfs方法通过
+    
+13. 
 
 ---
 
@@ -1891,7 +1893,15 @@ class Solution {
      }
      ```
 
-     
+5. ##### [剑指 Offer 57. 和为s的两个数字](https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/)
+
+6. ##### [剑指 Offer 21. 调整数组顺序使奇数位于偶数前面](https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/)
+
+7. 
+
+---
+
+
 
 ## 并查集***
 
