@@ -195,7 +195,11 @@ class TrieNode {
 
 15. ##### [剑指 Offer 39. 数组中出现次数超过一半的数字](https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/)
 
-16. 
+16. ##### [剑指 Offer 55 - II. 平衡二叉树 $](https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/) 
+
+17. ##### [剑指 Offer 28. 对称的二叉树 #](https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/)
+
+18. 
 
 
 
@@ -948,7 +952,7 @@ class TrieNode {
 
      - dfs方法通过
     
-13. 
+13. ##### [剑指 Offer 18. 删除链表的节点 $](https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/)
 
 ---
 
