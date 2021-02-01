@@ -1750,9 +1750,7 @@ class Solution {
 
    - 使用快速排序的思想, 对第k个元素存在的一半进行进一步的递归划分排序
 
-     
-   
-2. 
+2. ##### [剑指 Offer 40. 最小的k个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/)
 
 
 
