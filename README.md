@@ -954,6 +954,10 @@ class TrieNode {
     
 13. ##### [剑指 Offer 18. 删除链表的节点 $](https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/)
 
+14. ##### [剑指 Offer 11. 旋转数组的最小数字](https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/)
+
+     - 二分法的状态判断
+
 ---
 
 
