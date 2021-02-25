@@ -957,6 +957,10 @@ class TrieNode {
 14. ##### [剑指 Offer 11. 旋转数组的最小数字](https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/)
 
      - 二分法的状态判断
+    
+15. ##### [剑指 Offer 61. 扑克牌中的顺子](https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/)
+
+16. 
 
 ---
 
